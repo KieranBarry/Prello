@@ -1,0 +1,47 @@
+body {
+	background-color: #CAE1FF;
+	font-color: #bbb;
+}
+
+form {
+	text-align: left;
+	margin: auto;
+	padding: 20px;
+	background-color: white;
+}
+
+input[type=email], input[type=password] {
+	width: 100%;
+	display: inline-block;
+	margin: 10px 0px 20px 0px;
+	border:1px solid #bbb;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+input[type=checkbox] {
+	margin: 5px 5px 5px 0px;
+}
+
+h1 {
+	font-size: 24px
+}
+
+button {
+	width: 100%;
+	border: 0px;
+	background-color: #4876FF;
+	color: white;
+	padding: 10px;
+	margin: 5px 0px;
+	font-size: 12px
+}
+
+.container {
+	padding: 15px;
+}
+.main {
+	margin: auto;
+	width: 50%;
+}
+
