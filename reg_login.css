@@ -1,47 +1,104 @@
 body {
-	background-color: #CAE1FF;
-	font-color: #bbb;
+	background-color: #6495ED;
+	color: #555;
+	font-weight: lighter;
+	font-family: Helvetica;
+}
+
+h1 {
+	color: white;
+	text-align: center;
+	font-weight: lighter;
+	margin-top: 100px;
 }
 
 form {
 	text-align: left;
 	margin: auto;
-	padding: 20px;
+	padding: 35px;
 	background-color: white;
+	font-size: 15px;
+}
+
+p {
+	margin: 0px 0px 0px 2px;
 }
 
 input[type=email], input[type=password] {
 	width: 100%;
 	display: inline-block;
-	margin: 10px 0px 20px 0px;
+	margin: 5px 0px 20px 0px;
 	border:1px solid #bbb;
+	border-radius: 4px;
 	padding: 8px;
 	box-sizing: border-box;
 }
 
 input[type=checkbox] {
-	margin: 5px 5px 5px 0px;
-}
-
-h1 {
-	font-size: 24px
+	margin: 15px 5px 5px 0px;
 }
 
 button {
 	width: 100%;
 	border: 0px;
-	background-color: #4876FF;
+	border-radius: 4px;
+	background-color: #3D59AB;
 	color: white;
 	padding: 10px;
-	margin: 5px 0px;
-	font-size: 12px
+	font-size: 12px;
 }
 
-.container {
-	padding: 15px;
+button[type=submit] {
+	margin-top: 5px;
 }
+
+button[type=submit]:hover {
+	background-color: #6495ED;
+	cursor: pointer;
+}
+
+.form_container {
+	margin: 0px;
+}
+
 .main {
 	margin: auto;
-	width: 50%;
+	width: 450px;
+	border-radius: 4px;
+	margin-bottom: 100px;
 }
 
+.toggle_container button {
+	width: 50%;
+	float: left;
+	margin-bottom: 25px;
+}
+
+.register {
+	border-radius: 4px 0px 0px 4px;
+}
+
+.login {
+	border-radius: 0px 4px 4px 0px;
+}
+
+.inactive {
+	border: 3px solid #3D59AB;
+	padding: 7px 0px;
+	background-color: white;
+	color: #3D59AB;
+}
+
+.inactive:hover {
+	color: white;
+	background-color: #6495ED;
+	cursor: pointer;
+}
+
+.inactive + .login {
+	border-left: 0px;
+}
+
+.inactive + .register {
+	border-right: 0px;
+}
