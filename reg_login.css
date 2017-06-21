@@ -57,6 +57,10 @@ button[type=submit]:hover {
 	cursor: pointer;
 }
 
+form {
+	border-radius: 4px;
+}
+
 .form_container {
 	margin: 0px;
 }
@@ -64,7 +68,6 @@ button[type=submit]:hover {
 .main {
 	margin: auto;
 	width: 450px;
-	border-radius: 4px;
 	margin-bottom: 100px;
 }
 

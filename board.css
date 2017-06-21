@@ -1,0 +1,340 @@
+/*
+  COLORS:
+    dark blue: #3D59AB;
+    light blue: #6495ED;
+
+  QUESTIONS:
+    - How do i get Board Name to maintain
+      its position only for x-scroll?
+*/
+
+body {
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin: 0;
+  font-family: Helvetica;
+  margin-top: 50px;
+  padding-bottom: 20px;
+  background-color: #6495ED;
+  width: 2290px;
+}
+
+nav {
+  position: fixed;
+  top: 0px;
+  background-color: #3D59AB;
+  height: 50px;
+  width: 100%;
+  margin: 0px;
+  vertical-align: middle;
+}
+
+span {
+  font-size: 10px;
+  position: relative;
+  vertical-align: middle;
+  top: -1.5px;
+}
+
+.down_arrow {
+  left: 3px;
+}
+
+.left_arrow {
+  right: 3px;
+}
+
+h1 {
+  color: white;
+  font-weight: lighter;
+  margin: auto;
+  height: 100%;
+  text-align: center;
+  padding: 12px 0px;
+}
+
+nav button {
+  width: 70px;
+  border: 0;
+  background-color: #3D59AB;
+  color: white;
+  margin: 15px 15px 15px 20px;
+  font-size: 15px;
+  position: fixed;
+  padding: 0;
+}
+
+nav button:hover {
+  cursor: pointer;
+  color: #6495ED;
+}
+
+.options_button {
+  right: 20px;
+  top: 0px;
+}
+
+p {
+  margin: 0;
+}
+
+
+/* ////////     ////////    SIDE MENU    ///////    ///////// */
+
+
+.side_menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #e8e8e8;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.side_menu a {
+  margin: 10px 10px 10px 30px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #3D59AB;
+  display: block;
+  transition: 0.3s;
+}
+
+.side_menu a:nth-child(2) {
+  margin-top: 0px;
+}
+
+.side_menu a:hover{
+  color: #6495ED;
+}
+
+.side_menu .close_button {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  font-size: 36px;
+  margin: 0;
+}
+
+/* ////////     ////////    DROPDOWN MENU    ///////    ///////// */
+
+.drop_down {
+  height: 0px;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 50px;
+  left: 0;
+  background-color: #e8e8e8;
+  overflow-x: hidden;
+  transition: 0.5s;
+  border-radius: 4px;
+}
+
+.drop_down li {
+  height: 15px;
+  width: 206px;
+  margin: 7px;
+  background-color: #3D59AB;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.drop_down li:hover {
+  cursor: pointer;
+  background-color: #6495ED;
+}
+
+/* ////////     ////////    LOL AREA    ///////    ///////// */
+
+
+h2 {
+  margin: 0px;
+  padding: 15px 30px 10px 30px;
+  color: white;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  border-radius: 10px;
+  padding: 0;
+}
+
+.category {
+  color: #333;
+  margin: 15px 0px 10px 0px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#lol {
+  margin: 0px 20px;
+}
+
+#lol > li {
+  display: inline-block;
+  height: 640px;
+  width: 300px;
+  background: #e8e8e8;
+  margin: 0 10px;
+  vertical-align: top;
+}
+
+#lol > li:first-child {
+  margin-left: 0;
+}
+
+.card_list li {
+  display: block;
+  width: 260px;
+  height: 55px;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+}
+
+.card_list li:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.features {
+  padding: 0;
+  margin: 0;
+}
+
+.card_title {
+  font-size: 18px;
+  white-space: normal;
+  margin: 3px 8px 5px 7px;
+  font-family: Times;
+}
+
+.features li {
+  width: 55px;
+  height: 8px;
+  border-radius: 4px;
+  border:0;
+  display: inline-block;
+  padding:0;
+  margin: 0px 0px 3px 5px;
+}
+
+.features li:first-child {
+    background-color: blue;
+}
+
+.features li:nth-child(2) {
+    background-color: red;
+}
+.features li:nth-child(3) {
+    background-color: green;
+}
+.features li:nth-child(4) {
+    background-color: purple;
+}
+
+
+
+/* ////////     ////////    CARD AREA    ///////    ///////// */
+
+.card {
+  height: 420px;
+  width: 400px;
+  padding: 30px 40px;
+  background-color: #e8e8e8;
+  margin: 100px 200px 50px 200px;
+  border-radius: 10px;
+  color:#333;
+}
+
+h3 {
+  margin: 0;
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 18px;
+  margin: 25px 0px 10px 0px;
+}
+
+textarea {
+  width: 380px;
+  height: 30px;
+  resize: none;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 13px;
+  word-wrap: break-word;
+}
+
+.card button {
+  float: left;
+  width: 60px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 15px;
+  margin: 7px 0px;
+  padding: 5px 10px;
+  background-color: #3D59AB;
+  color: white;
+}
+
+.subtitle, .edit_button {
+  color: #999;
+  font-size: 14px;
+  display: inline-block;
+  margin: 20px 1px 0px 1px;
+}
+
+.edit_button:hover {
+  text-decoration: none;
+}
+
+.description {
+  white-space: normal;
+  margin: 5px 1px;
+  font-family: Times;
+  font-size: 16px;
+}
+
+.cancel_button {
+  color: #999;
+  font-size: 14px;
+  float: right;
+  margin: 12px 4px;
+}
+
+.card .features li {
+  padding: 5px 10px;
+  height: 15px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  margin: 10px 5px 0px 0px;
+}
+
+#add_button {
+  width: 10px;
+  background-color: #bbb;
+  font-size: 20px;
+  padding: 0px 10px 10px 10px;
+}
+
+#add_button:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
