@@ -37,9 +37,10 @@ li:hover {
 button {
 	text-align: center;
 	width: 150px;
-	background-color: #d8d8d8;
+	background-color: #ccc;
 	height: 150px;
 	display: inline-block;
+	padding: 0px 30px 100px 30px;
 	margin: 10px 5px;
 	vertical-align: top;
 	border: 0;
@@ -51,6 +52,8 @@ button:hover {
 	cursor: pointer;
 }
 
-img {
-	height: 70%;
+a {
+	font-size: 120px;
+	text-decoration: none;
+	color: white;
 }

@@ -9,14 +9,12 @@
 */
 
 body {
-  overflow-x: scroll;
-  white-space: nowrap;
   margin: 0;
   font-family: Helvetica;
   margin-top: 50px;
   padding-bottom: 20px;
   background-color: #6495ED;
-  width: 2290px;
+  width: 100%;
 }
 
 nav {
@@ -29,7 +27,7 @@ nav {
   vertical-align: middle;
 }
 
-span {
+button span {
   font-size: 10px;
   position: relative;
   vertical-align: middle;
@@ -79,6 +77,14 @@ p {
 }
 
 
+.close_button {
+  position: absolute;
+  top: 0;
+  font-size: 36px;
+  margin: 0;
+}
+
+
 /* ////////     ////////    SIDE MENU    ///////    ///////// */
 
 
@@ -113,11 +119,7 @@ p {
 }
 
 .side_menu .close_button {
-  position: absolute;
-  top: 0;
-  right: 30px;
-  font-size: 36px;
-  margin: 0;
+    right: 30px;
 }
 
 /* ////////     ////////    DROPDOWN MENU    ///////    ///////// */
@@ -152,12 +154,131 @@ p {
   background-color: #6495ED;
 }
 
+
+/* ////////     ////////    MODAL AREA    ///////    ///////// */
+
+#modal {
+  display: none;
+}
+
+.modal_bg {
+  background-color: black;
+  opacity: .5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left:0;
+  top:0;
+}
+
+.card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 335px;
+  width: 400px;
+  padding: 30px 40px;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  color:#333;
+}
+
+h3 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.card .close_button {
+  top: 3px;
+  right: 10px;
+  font-size: 25px;
+  text-decoration: none;
+  color: #888;
+}
+
+h4 {
+  font-size: 18px;
+  margin: 25px 0px 10px 0px;
+}
+
+textarea {
+  width: 380px;
+  height: 30px;
+  resize: none;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 13px;
+  word-wrap: break-word;
+}
+
+.card button {
+  float: left;
+  width: 60px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 15px;
+  margin: 7px 0px;
+  padding: 5px 10px;
+  background-color: #3D59AB;
+  color: white;
+}
+
+.subtitle, .edit_button {
+  color: #888;
+  font-size: 14px;
+  display: inline-block;
+  margin: 0px 1px 5px 1px;
+}
+
+.card a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.description {
+  white-space: normal;
+  margin: 5px 1px;
+  font-family: Times;
+  font-size: 16px;
+}
+
+.cancel_button {
+  color: #888;
+  font-size: 14px;
+  float: right;
+  margin: 12px 4px;
+}
+
+.card .features li {
+  padding: 5px 10px;
+  height: 15px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  margin: 10px 5px 20px 0px;
+}
+
+#add_feature {
+  width: 10px;
+  background-color: #bbb;
+  font-size: 20px;
+  padding: 0px 10px 10px 10px;
+}
+
+#add_feature:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+
 /* ////////     ////////    LOL AREA    ///////    ///////// */
 
 
 h2 {
   margin: 0px;
-  padding: 15px 30px 10px 30px;
+  padding: 15px 23px 10px 23px;
   color: white;
 }
 
@@ -179,13 +300,19 @@ li {
   font-weight: bold;
 }
 
+#lol_container {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
 #lol {
   margin: 0px 20px;
 }
 
 #lol > li {
   display: inline-block;
-  height: 640px;
+  height: 670px;
   width: 300px;
   background: #e8e8e8;
   margin: 0 10px;
@@ -194,6 +321,10 @@ li {
 
 #lol > li:first-child {
   margin-left: 0;
+}
+
+#lol > li:last-child {
+  height: 50px;
 }
 
 .card_list li {
@@ -233,108 +364,41 @@ li {
 }
 
 .features li:first-child {
-    background-color: blue;
+  background-color: blue;
 }
 
 .features li:nth-child(2) {
-    background-color: red;
+  background-color: red;
 }
+
 .features li:nth-child(3) {
-    background-color: green;
+  background-color: green;
 }
+
 .features li:nth-child(4) {
-    background-color: purple;
+  background-color: purple;
 }
 
 
-
-/* ////////     ////////    CARD AREA    ///////    ///////// */
-
-.card {
-  height: 420px;
-  width: 400px;
-  padding: 30px 40px;
-  background-color: #e8e8e8;
-  margin: 100px 200px 50px 200px;
-  border-radius: 10px;
-  color:#333;
-}
-
-h3 {
-  margin: 0;
-  font-size: 25px;
-}
-
-h4 {
-  font-size: 18px;
-  margin: 25px 0px 10px 0px;
-}
-
-textarea {
-  width: 380px;
-  height: 30px;
-  resize: none;
-  border: 0;
-  border-radius: 4px;
-  padding: 10px;
-  font-size: 13px;
-  word-wrap: break-word;
-}
-
-.card button {
-  float: left;
-  width: 60px;
-  border: 0;
-  border-radius: 3px;
-  font-size: 15px;
-  margin: 7px 0px;
-  padding: 5px 10px;
-  background-color: #3D59AB;
-  color: white;
-}
-
-.subtitle, .edit_button {
-  color: #999;
-  font-size: 14px;
-  display: inline-block;
-  margin: 20px 1px 0px 1px;
-}
-
-.edit_button:hover {
+#lol a {
+  color: #888;
   text-decoration: none;
+  display: block;
+  font-weight: lighter;
 }
 
-.description {
-  white-space: normal;
-  margin: 5px 1px;
-  font-family: Times;
-  font-size: 16px;
+#lol a:hover {
+  color: #333;
 }
 
-.cancel_button {
-  color: #999;
-  font-size: 14px;
-  float: right;
-  margin: 12px 4px;
+.add_card {
+  font-size: 15px;
+  margin: 12px 20px;
 }
 
-.card .features li {
-  padding: 5px 10px;
-  height: 15px;
-  font-size: 14px;
-  color: white;
-  text-align: center;
-  margin: 10px 5px 0px 0px;
+.add_category  {
+  font-size: 15px;
+  margin: 16px 20px;
 }
 
-#add_button {
-  width: 10px;
-  background-color: #bbb;
-  font-size: 20px;
-  padding: 0px 10px 10px 10px;
-}
 
-#add_button:hover {
-  background-color: #ccc;
-  cursor: pointer;
-}

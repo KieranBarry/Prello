@@ -5,16 +5,30 @@ body {
 	font-family: Helvetica;
 }
 
+nav {
+  position: fixed;
+  top: 0;
+  left:0;
+  background-color: #3D59AB;
+  height: 50px;
+  width: 100%;
+  margin: 0px;
+  vertical-align: middle;
+}
+
 h1 {
-	color: white;
-	text-align: center;
-	font-weight: lighter;
-	margin-top: 100px;
+  color: white;
+  font-weight: lighter;
+  margin: auto;
+  height: 100%;
+  text-align: center;
+  padding: 12px 0px;
 }
 
 form {
 	text-align: left;
 	margin: auto;
+	margin-top: 100px;
 	padding: 35px;
 	background-color: white;
 	font-size: 15px;
