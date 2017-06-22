@@ -363,7 +363,7 @@ li {
   margin: 0px 0px 3px 5px;
 }
 
-.features li:first-child {
+/*.features li:first-child {
   background-color: blue;
 }
 
@@ -377,7 +377,7 @@ li {
 
 .features li:nth-child(4) {
   background-color: purple;
-}
+}*/
 
 
 #lol a {
