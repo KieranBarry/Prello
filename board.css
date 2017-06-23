@@ -2,10 +2,6 @@
   COLORS:
     dark blue: #3D59AB;
     light blue: #6495ED;
-
-  QUESTIONS:
-    - How do i get Board Name to maintain
-      its position only for x-scroll?
 */
 
 body {
@@ -16,6 +12,9 @@ body {
   background-color: #6495ED;
   width: 100%;
 }
+
+
+/* ////////     ////////    NAV BAR    ///////    ///////// */
 
 nav {
   position: fixed;
@@ -67,7 +66,7 @@ nav button:hover {
   color: #6495ED;
 }
 
-.options_button {
+#options_button {
   right: 20px;
   top: 0px;
 }
@@ -77,18 +76,10 @@ p {
 }
 
 
-.close_button {
-  position: absolute;
-  top: 0;
-  font-size: 36px;
-  margin: 0;
-}
-
-
 /* ////////     ////////    SIDE MENU    ///////    ///////// */
 
 
-.side_menu {
+#side_menu {
   height: 100%;
   width: 0;
   position: fixed;
@@ -101,7 +92,7 @@ p {
   padding-top: 60px;
 }
 
-.side_menu a {
+#side_menu a {
   margin: 10px 10px 10px 30px;
   text-decoration: none;
   font-size: 25px;
@@ -110,21 +101,29 @@ p {
   transition: 0.3s;
 }
 
-.side_menu a:nth-child(2) {
+#side_menu a:nth-child(2) {
   margin-top: 0px;
 }
 
-.side_menu a:hover{
+#side_menu a:hover{
   color: #6495ED;
 }
 
-.side_menu .close_button {
+#side_menu .close_button {
     right: 30px;
 }
 
+.close_button {
+  position: absolute;
+  top: 0;
+  font-size: 36px;
+  margin: 0;
+}
+
+
 /* ////////     ////////    DROPDOWN MENU    ///////    ///////// */
 
-.drop_down {
+#drop_down {
   height: 0px;
   width: 250px;
   position: fixed;
@@ -137,7 +136,7 @@ p {
   border-radius: 4px;
 }
 
-.drop_down li {
+#drop_down li {
   height: 15px;
   width: 206px;
   margin: 7px;
@@ -149,7 +148,7 @@ p {
   font-weight: bold;
 }
 
-.drop_down li:hover {
+#drop_down li:hover {
   cursor: pointer;
   background-color: #6495ED;
 }
@@ -161,7 +160,7 @@ p {
   display: none;
 }
 
-.modal_bg {
+#modal_bg {
   background-color: black;
   opacity: .5;
   width: 100%;
@@ -171,12 +170,15 @@ p {
   top:0;
 }
 
-.card {
+#editable_description {
+  display: none;
+}
+
+#card {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 335px;
   width: 400px;
   padding: 30px 40px;
   background-color: #e8e8e8;
@@ -189,7 +191,7 @@ h3 {
   font-size: 25px;
 }
 
-.card .close_button {
+#card .close_button {
   top: 3px;
   right: 10px;
   font-size: 25px;
@@ -200,11 +202,12 @@ h3 {
 h4 {
   font-size: 18px;
   margin: 25px 0px 10px 0px;
+  clear: both;
 }
 
 textarea {
   width: 380px;
-  height: 30px;
+  height: 35px;
   resize: none;
   border: 0;
   border-radius: 4px;
@@ -213,16 +216,20 @@ textarea {
   word-wrap: break-word;
 }
 
-.card button {
+.save_button {
   float: left;
   width: 60px;
   border: 0;
   border-radius: 3px;
   font-size: 15px;
-  margin: 7px 0px;
+  margin: 7px 0px 0px 0px;
   padding: 5px 10px;
   background-color: #3D59AB;
   color: white;
+}
+
+#description_save {
+  margin-bottom: 15px;
 }
 
 .subtitle, .edit_button {
@@ -232,12 +239,12 @@ textarea {
   margin: 0px 1px 5px 1px;
 }
 
-.card a:hover {
+#card a:hover {
   text-decoration: none;
   color: #333;
 }
 
-.description {
+#text_description {
   white-space: normal;
   margin: 5px 1px;
   font-family: Times;
@@ -251,27 +258,56 @@ textarea {
   margin: 12px 4px;
 }
 
-.card .features li {
-  padding: 5px 10px;
+#card_labels {
+  margin: 10px 0px 20px 0px;
+}
+
+.card_label {
+  display: inline-block;
+  padding: 3px 10px 5px 10px;
   height: 15px;
   font-size: 14px;
   color: white;
   text-align: center;
-  margin: 10px 5px 20px 0px;
+  margin: 0px 5px 0px 0px;
 }
 
-#add_feature {
+#add_label {
+  display: inline-block;
   width: 10px;
+  height: 21px;
   background-color: #bbb;
-  font-size: 20px;
-  padding: 0px 10px 10px 10px;
+  color: white;
+  font-size: 18px;
+  padding: 1px 8px 1px 7px;
+  vertical-align: top;
+/*  transition: width .2s, height .5s .2s; */
+  position:fixed;
+
 }
 
-#add_feature:hover {
+#add_label p {
+  position: relative;
+  top: -2px;
+}
+
+#add_label:hover {
   background-color: #ccc;
   cursor: pointer;
 }
 
+#add_label .card_label {
+  width: 90px;
+  display: block;
+  margin: 5px 0px;
+  text-align: left;
+  /*position: relative;
+  transition: transform 1s, top 1s;*/
+}
+
+#add_label .card_label:hover {
+  opacity: .5;
+}
 
 /* ////////     ////////    LOL AREA    ///////    ///////// */
 
@@ -341,44 +377,27 @@ li {
   background-color: #eee;
 }
 
-.features {
-  padding: 0;
-  margin: 0;
-}
-
 .card_title {
   font-size: 18px;
   white-space: normal;
-  margin: 3px 8px 5px 7px;
+  margin: 5px 8px 5px 7px;
   font-family: Times;
+  clear: both;
+}
+
+.features {
+  overflow: hidden;
 }
 
 .features li {
-  width: 55px;
   height: 8px;
+  width: 55px;
   border-radius: 4px;
   border:0;
-  display: inline-block;
+  float: left;  
   padding:0;
   margin: 0px 0px 3px 5px;
 }
-
-/*.features li:first-child {
-  background-color: blue;
-}
-
-.features li:nth-child(2) {
-  background-color: red;
-}
-
-.features li:nth-child(3) {
-  background-color: green;
-}
-
-.features li:nth-child(4) {
-  background-color: purple;
-}*/
-
 
 #lol a {
   color: #888;

@@ -11,12 +11,12 @@
 				<p>Boards <span class="down_arrow" id="down_arrow">&#9660</span></p>
 			</button>
 			<h1>Prello</h1>
-			<button class="options_button">
+			<button id="options_button">
 				<p><span class="left_arrow">&#9664</span> Options</p>
 			</button>
 		</nav>
 
-		<div class="side_menu" id="side_menu">
+		<div id="side_menu">
 			<a href="#" class="close_button">&times;</a>
 			<a href="#">Option</a>
 		  	<a href="#">Option 2</a>
@@ -24,7 +24,7 @@
 		  	<a href="#">Option 4</a>
 		</div>
 
-		<div class="drop_down" id="drop_down">
+		<div id="drop_down">
 			<ul>
 				<li>Board Name</li>
 				<li>Board Name</li>
@@ -48,25 +48,26 @@
 
 
 		<div id="modal">
-			<div class="modal_bg"></div>
-			<div class="card">
+			<div id="modal_bg"></div>
+			<div id="card">
 				<a href="#" id="close_card" class="close_button">&times;</a>
 				<h3>Card Name</h3>
-				<p class="subtitle">in <span class="category_name">Category Name</span></p>
-				<ul class="features">
-					<li>label 1</li>
-					<li>label 2</li>
-					<li>label 3</li>
-					<li>label 4</li>
-					<li id="add_feature">+</li>
-				</ul>
+				<p class="subtitle">in <span id="category_name">Category Name</span></p>
+				<ul id="card_labels"></ul>
 				<p class="subtitle">Description</p>
 				<a href="#" class="edit_button">Edit</a>
-				<p class="description">This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.</p>
-				<h4>Leave a Comment</h4>
-				<form action="">
+				<p id="text_description">This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.</p>
+				<div id="editable_description">
+					<form id="new_comment" action="">
+						<textarea placeholder="Write a description..." id="edit_description_text"></textarea>
+						<button type="submit" id="description_save" class="save_button">Save</button>
+					</form>
+					<a href="#" class="cancel_button" id="description_cancel">Cancel</a>
+				</div>
+				<h4>Comments</h4>
+				<form id="new_comment" action="">
 					<textarea placeholder="Write a comment..."></textarea>
-					<button type="submit">Save</button>
+					<button type="submit" class="save_button">Save</button>
 				</form>
 				<a href="#" class="cancel_button">Cancel</a>
 			</div>
