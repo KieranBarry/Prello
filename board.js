@@ -103,6 +103,11 @@ function addCardButton(cat_li, card, category_index, card_index) {
 	card_button_li.setAttribute('data-category-index', category_index);
 	card_button_li.setAttribute('data-card-index', card_index);
 	
+	var delete_button = document.createElement('a');
+	delete_button.setAttribute('class', 'delete_card');
+	delete_button.textContent = "x";
+	card_button_li.appendChild(delete_button);
+
 	var ul = document.createElement('ul');
 	ul.setAttribute('class', 'features');
 	ul.setAttribute('data-category-index', category_index);
@@ -123,11 +128,8 @@ function addCardButton(cat_li, card, category_index, card_index) {
 
 	card_button_li.appendChild(ul);
 	card_button_li.appendChild(p);
-	card_button_li.addEventListener('click', function(e) {
-		cardButtonHandler(e);
-	});
+
 	cat_li.children[1].appendChild(card_button_li);
-	cat_li.style.height = parseInt(cat_li.style.height,10) + 85 + "px";
 }
 
 function addCategory(category, index) {
@@ -143,22 +145,12 @@ function addCategory(category, index) {
 	ul.setAttribute('class', 'card_list');
 	
 	var a = document.createElement('a');
-	a.setAttribute('class','add_card');
+	a.setAttribute('class','add_content');
 	a.setAttribute('data-category-index', index);
 	a.textContent = "Add new card...";
-	a.addEventListener('click', function(e) {
-		var category_index = e.target.getAttribute('data-category-index');
-		var new_card_div = document.querySelector('[data-category-index="'+category_index+'"][class="new_card"]');
-		new_card_div.style.display = "block";
-		var new_title = document.querySelector('[data-category-index="'+category_index+'"][class="title_input"]');
-		new_title.focus();
-
-		e.target.parentElement.style.height = parseInt(e.target.parentElement.style.height,10)+35+"px";
-		e.target.style.display = "none";
-	});
 	
 	var new_card_div = document.createElement('div');
-	new_card_div.setAttribute('class', 'new_card');
+	new_card_div.setAttribute('class', 'new_content');
 	new_card_div.setAttribute('data-category-index', index);
 	var form = document.createElement('form');
 	var title_input = document.createElement('input');
@@ -168,18 +160,16 @@ function addCategory(category, index) {
 	title_input.required = true;
 	form.appendChild(title_input);
 	var submit_button = document.createElement('button');
-	submit_button.setAttribute('class', 'add_button');
+	submit_button.setAttribute('class', 'add_card_button');
 	submit_button.textContent = "Add";
-	submit_button.addEventListener('click', function(e) {
-		addCard(e);
-	});
+
 	form.appendChild(submit_button);
 	var cancel_button = document.createElement('a');
 	cancel_button.setAttribute('class','cancel_new_button');
 	cancel_button.textContent = "Cancel";
-	cancel_button.addEventListener('click', function(e) {
-		resetAddButton(e.target.parentElement);
-	});
+	// cancel_button.addEventListener('click', function(e) {
+	// 	resetAddButton(e.target.parentElement);
+	// });
 	new_card_div.appendChild(form);
 	new_card_div.appendChild(cancel_button);
 	new_card_div.style.display = "none";
@@ -189,7 +179,7 @@ function addCategory(category, index) {
 	li.appendChild(a);
 	li.appendChild(new_card_div);
 	
-	li.style.height = "80px"; //JUST PLUS 80
+	// li.style.height = "80px"; //JUST PLUS 80
 
 	var before = document.querySelector("#lol > li:last-child");
 	lol.insertBefore(li, before);
@@ -340,19 +330,20 @@ function fillCard(card) {
 	}
 }
 
-function cardButtonHandler(e) {
-	var category_index = e.target.getAttribute('data-category-index');
-	var card_index = e.target.getAttribute('data-card-index');
-	var card = all_categories[category_index].card_list[card_index];
+// function cardButtonHandler(e) {
+// 	var category_index = e.target.getAttribute('data-category-index');
+// 	var card_index = $(this).parent().index($(this));
+// 	console.log($(this));
+// 	var card = all_categories[category_index].card_list[$(this).eq()];
 	
-	var card_div = document.querySelector('#card');
-	card_div.setAttribute('data-category-index', category_index);
-	card_div.setAttribute('data-card-index', card_index);
+// 	var card_div = document.querySelector('#card');
+// 	card_div.setAttribute('data-category-index', category_index);
+// 	card_div.setAttribute('data-card-index', card_index);
 
-	fillCard(card);
+// 	fillCard(card);
 
-	document.querySelector("#modal").style.display = "block";
-};
+// 	document.querySelector("#modal").style.display = "block";
+// };
 
 /* //////     /////////   NEW CARD    /////////    ////// */
 
@@ -371,64 +362,52 @@ function cardButtonHandler(e) {
 // 	});
 // }
 
-function resetAddButton(new_card_div) {
-	new_card_div.style.display = "none";
-	new_card_div.firstChild.firstChild.value = "";
-	new_card_div.parentElement.style.height = parseInt(new_card_div.parentElement.style.height,10)-35+"px";
+// function resetAddButton(new_card_div) {
+// 	new_card_div.style.display = "none";
+// 	new_card_div.firstChild.firstChild.value = "";
+// 	new_card_div.parentElement.style.height = parseInt(new_card_div.parentElement.style.height,10)-35+"px";
 	
-	var add_card_button = document.querySelector('[data-category-index="'+new_card_div.getAttribute('data-category-index')+'"][class="add_card"]');
-	add_card_button.style.display = "block";
-}
-
-function addCard(e) {
-	var category_index = e.target.parentElement.parentElement.getAttribute('data-category-index');
-	var card_index = all_categories[category_index].card_list.length;
-	var title = e.target.parentElement.firstChild.value;
-
-	// var card_title = document.querySelector()
-	var new_card = new Card(title, all_categories[category_index].title, "", []);
-	all_categories[category_index].card_list.push(new_card);
-	var cat_li = e.target.parentElement.parentElement.parentElement;
-
-	addCardButton(cat_li, new_card, category_index, card_index);
-	resetAddButton(e.target.parentElement.parentElement);
-}
+// 	var add_card_button = document.querySelector('[data-category-index="'+new_card_div.getAttribute('data-category-index')+'"][class="add_content"]');
+// 	add_card_button.style.display = "block";
+// }
 
 /* //////     /////////   NEW CATEGORY    /////////    ////// */
 
-var new_cat_button = document.querySelector(".add_category");
-var cancel_cat_button = document.querySelector("#category_cancel_button");
-var cat_add_button = document.querySelector("#category_add_button");
 
-new_cat_button.addEventListener('click', function(e) {
-	var new_cat_div = e.target.parentElement.children[1];
-	new_cat_div.style.display = "block";
-	new_cat_div.children[0].children[0].focus();
 
-	e.target.parentElement.style.height = "80px";
-	e.target.style.display = "none";
-});
+// var new_cat_button = document.querySelector(".add_category");
+// var cancel_cat_button = document.querySelector("#category_cancel_button");
+// var cat_add_button = document.querySelector("#category_add_button");
 
-category_cancel_button.addEventListener('click', function(e) {
-	console.log(e.target.parentElement);
-	resetCatAddButton(e.target.parentElement);
-});
+// new_cat_button.addEventListener('click', function(e) {
+// 	var new_cat_div = e.target.parentElement.children[1];
+// 	new_cat_div.style.display = "block";
+// 	new_cat_div.children[0].children[0].focus();
 
-category_add_button.addEventListener('click', function(e) {
-	var new_category = new Category(e.target.parentElement.children[0].value, []);
-	addCategory(new_category, all_categories.length);
-	all_categories.push(new_category);
-	resetCatAddButton(e.target.parentElement.parentElement);
-});
+// 	e.target.parentElement.style.height = "80px";
+// 	e.target.style.display = "none";
+// });
 
-function resetCatAddButton(new_cat_div) {
-	new_cat_div.style.display = "none";
-	new_cat_div.children[0].children[0].value = "";
-	new_cat_div.parentElement.style.height = "50px";
+// category_cancel_button.addEventListener('click', function(e) {
+// 	console.log(e.target.parentElement);
+// 	resetCatAddButton(e.target.parentElement);
+// });
+
+// category_add_button.addEventListener('click', function(e) {
+// 	var new_category = new Category(e.target.parentElement.children[0].value, []);
+// 	addCategory(new_category, all_categories.length);
+// 	all_categories.push(new_category);
+// 	resetCatAddButton(e.target.parentElement.parentElement);
+// });
+
+// function resetCatAddButton(new_cat_div) {
+// 	new_cat_div.style.display = "none";
+// 	new_cat_div.children[0].children[0].value = "";
+// 	new_cat_div.parentElement.style.height = "50px";
 	
-	var new_cat_button = document.querySelector('.add_category');
-	new_cat_button.style.display = "block";
-}
+// 	var new_cat_button = document.querySelector('.add_content');
+// 	new_cat_button.style.display = "block";
+// }
 
 /* //////     /////////   EDIT CARD    /////////    ////// */
 
@@ -452,6 +431,7 @@ desc_cancel_button.addEventListener('click', function(e) {
 
 var desc_save_button = document.querySelector("#description_save");
 desc_save_button.addEventListener('click', function(e) {
+	// e.preventDefault();
 	var edit_description_text = document.querySelector('#edit_description_text');
 	var description_editor = document.querySelector("#editable_description");
 	var text_description = document.querySelector('#text_description');
@@ -475,3 +455,68 @@ function resetDescription() {
 }
 
 
+/* //////     /////////   EVENT DELEGATION    /////////    ////// */
+
+var lol;
+$(function() {
+	lol = $('#lol');
+	lol.on('click', '.delete_card', function(e) {
+		var to_delete = $(this).parent()
+		var category_index = to_delete.attr('data-category-index');
+		all_categories[category_index].card_list.splice(to_delete.attr('data-card-index'), 1);
+
+		to_delete.remove();
+
+		e.stopPropagation();
+  	});
+
+  	lol.on('click', '.card_button', function(e) {
+  		var category_index = $(this).parent().parent().index();
+		var card_index = $(this).index();
+		var card = all_categories[category_index].card_list[card_index];
+
+		fillCard(card);
+
+		$('#modal').show();
+  	});
+
+  	lol.on('click', '.add_card_button', function(e) {
+  		var category_index = $(this).parent().parent().parent().index();
+  		var card_index = all_categories[category_index].card_list.length;
+  		var title = $(this).parent().find('input')[0].value;
+  		
+  		var new_card = new Card(title, all_categories[category_index].title, "", []);
+  		all_categories[category_index].card_list.push(new_card);
+
+  		var cat_li = $(this).parent().parent().parent()[0];
+		addCardButton(cat_li, new_card, category_index, card_index);
+
+		$(this).parent().parent().hide();
+  		$(this).parent().parent().find('input').val("");
+  		$(this).parent().parent().parent().find('.add_content').show();
+  	});
+
+  	lol.on('click', '.add_category_button', function(e) {
+  		var new_category = new Category($(this).parent().find('input')[0].value, []);
+  		all_categories.push(new_category);
+
+		addCategory(new_category, all_categories.length);
+
+		$(this).parent().parent().hide();
+  		$(this).parent().parent().find('input').val("");
+  		$(this).parent().parent().parent().find('.add_content').show();
+  	});
+
+  	lol.on('click', '.add_content', function(e) {
+  		$(this).parent().find('.new_content').show();
+  		$(this).parent().find('input').focus();
+  		$(this).hide();
+  	})
+
+  	lol.on('click', '.cancel_new_button', function(e) {
+  		$(this).parent().hide();
+  		$(this).parent().find('input').val("");
+  		$(this).parent().parent().find('.add_content').show();
+  	})
+
+});

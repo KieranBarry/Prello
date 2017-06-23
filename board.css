@@ -353,9 +353,10 @@ li {
 
 #lol > li {
   display: inline-block;
-  height: 670px;
+  /*height: 670px;*/
   width: 300px;
   background: #e8e8e8;
+  padding: 5px 0px;
   margin: 0 10px;
   vertical-align: top;
 }
@@ -364,17 +365,13 @@ li {
   margin-left: 0;
 }
 
-#lol > li:last-child {
-  height: 50px;
-}
-
 .card_list li {
   display: block;
   width: 260px;
   height: 55px;
   background-color: white;
   margin: 10px;
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
 }
 
 .card_list li:hover {
@@ -391,7 +388,8 @@ li {
 }
 
 .features {
-  overflow: hidden;
+  margin-top: 5px;
+  height: 8px;
 }
 
 .features li {
@@ -404,7 +402,7 @@ li {
   margin: 0px 0px 3px 5px;
 }
 
-.add_card {
+.add_content {
   font-size: 15px;
   margin: 12px 20px;
   color: #888;
@@ -413,24 +411,10 @@ li {
   font-weight: lighter;
 }
 
-.add_card:hover {
+.add_content:hover {
   color: #333;
   cursor: pointer;
 }
-
-.add_category  {
-  font-size: 15px;
-  margin: 16px 20px;
-  color: #888;
-  text-decoration: none;
-  display: block;
-  font-weight: lighter;
-}
-
-.add_category:hover {
-  color: #333;
-}
-
 .cancel_new_button {
   color: #888;
   font-size: 14px;
@@ -463,7 +447,7 @@ li {
   outline:0;
 }
 
-.add_button {
+.add_card_button, .add_category_button {
   float: left;
   width: 52px;
   border: 0;
@@ -476,7 +460,19 @@ li {
   font-weight: lighter;
 }
 
-.add_button:hover {
+.add_card_button:hover, .add_category_button:hover {
   cursor: pointer;
   background-color: #6495ED;
+}
+
+.delete_card {
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: lighter;
+  color: #aaa;
+  float: right;
+}
+
+.delete_card:hover {
+  color: #555;
 }
