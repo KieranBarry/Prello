@@ -228,6 +228,11 @@ textarea {
   color: white;
 }
 
+.save_button:hover {
+  cursor: pointer;
+  background-color: #6495ED;
+}
+
 #description_save {
   margin-bottom: 15px;
 }
@@ -241,7 +246,7 @@ textarea {
 
 #card a:hover {
   text-decoration: none;
-  color: #333;
+  color: #555;
 }
 
 #text_description {
@@ -399,25 +404,79 @@ li {
   margin: 0px 0px 3px 5px;
 }
 
-#lol a {
+.add_card {
+  font-size: 15px;
+  margin: 12px 20px;
   color: #888;
   text-decoration: none;
   display: block;
   font-weight: lighter;
 }
 
-#lol a:hover {
+.add_card:hover {
   color: #333;
-}
-
-.add_card {
-  font-size: 15px;
-  margin: 12px 20px;
+  cursor: pointer;
 }
 
 .add_category  {
   font-size: 15px;
   margin: 16px 20px;
+  color: #888;
+  text-decoration: none;
+  display: block;
+  font-weight: lighter;
 }
 
+.add_category:hover {
+  color: #333;
+}
 
+.cancel_new_button {
+  color: #888;
+  font-size: 14px;
+  float: right;
+  margin: 12px 10px;
+  text-decoration: underline;
+  font-weight: lighter;
+}
+
+.cancel_new_button:hover {
+  color: #555;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.title_input {
+  font-size: 15px;
+  width: 260px;
+  display: block;
+  margin: 10px 10px 0px 10px;
+  border: 0;
+  color: #888;
+  padding: 5px 10px;
+  font-weight: lighter;
+  border-radius: 10px;
+/*  background-color: #e8e8e8;
+*/}
+
+.title_input:focus {
+  outline:0;
+}
+
+.add_button {
+  float: left;
+  width: 52px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 15px;
+  margin: 7px 10px 0px 10px;
+  padding: 4px;
+  background-color: #3D59AB;
+  color: white;
+  font-weight: lighter;
+}
+
+.add_button:hover {
+  cursor: pointer;
+  background-color: #6495ED;
+}

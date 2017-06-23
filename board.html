@@ -42,6 +42,13 @@
 			<ul id="lol">
 				<li>
 					<a href="#" class="add_category">Add new category...</a>
+					<div class="new_category" style="display: none;">
+						<form>
+							<input type="text" id="category_title_input" class="title_input">
+							<button id="category_add_button" class="add_button">Add</button>
+						</form>
+						<a id="category_cancel_button" class="cancel_new_button">Cancel</a>
+					</div>
 				</li>
 			</ul>
 		</div>
@@ -58,16 +65,16 @@
 				<a href="#" class="edit_button">Edit</a>
 				<p id="text_description">This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.</p>
 				<div id="editable_description">
-					<form id="new_comment" action="">
+					<form>
 						<textarea placeholder="Write a description..." id="edit_description_text"></textarea>
-						<button type="submit" id="description_save" class="save_button">Save</button>
+						<button id="description_save" class="save_button">Save</button>
 					</form>
 					<a href="#" class="cancel_button" id="description_cancel">Cancel</a>
 				</div>
 				<h4>Comments</h4>
-				<form id="new_comment" action="">
+				<form>
 					<textarea placeholder="Write a comment..."></textarea>
-					<button type="submit" class="save_button">Save</button>
+					<button class="save_button">Save</button>
 				</form>
 				<a href="#" class="cancel_button">Cancel</a>
 			</div>
