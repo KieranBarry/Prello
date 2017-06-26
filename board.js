@@ -48,6 +48,144 @@ dropdown_button.addEventListener('click', function(e) {
 });
 
 
+
+/* //////     /////////   LOAD CARD    /////////    ////// */
+
+// function addLabel(card, label) {
+// 	// var modal_labels = $('#card_labels');
+// 	// var new_label = 
+
+// 	var ul = document.querySelector("#card_labels");
+// 	var li = document.createElement('li');
+// 	li.setAttribute('class', 'card_label');
+// 	li.style.backgroundColor = label.color;
+// 	li.textContent = label.name;
+// 	if (card.labels.length < all_labels.length) {
+// 		ul.insertBefore(li, ul.lastChild);
+// 	} else {
+// 		ul.appendChild(li);
+// 	}
+
+// 	var card_div = document.querySelector('#card');
+// 	var category_index = card_div.getAttribute('data-category-index');
+// 	var card_index = card_div.getAttribute('data-card-index');
+
+// 	var card_button_ul = document.querySelector('[data-category-index="'+category_index+'"][data-card-index="'+card_index+'"][class="features"]');
+// 	var button_li = document.createElement('li');
+// 	button_li.setAttribute('data-category-index', category_index);
+// 	button_li.setAttribute('data-card-index', card_index);
+// 	button_li.style.backgroundColor = label.color;
+// 	card_button_ul.appendChild(button_li);
+// };
+
+// function clearList(card) {
+// 	var ul = document.querySelector("#card_labels");
+// 	ul.removeChild(ul.lastChild);
+
+// 	if (card.labels.length < all_labels.length) {
+// 		var add_label = makeAddButton(card);
+// 		ul.appendChild(add_label);
+// 	}
+// }
+
+// function makeAddButton(card) {
+// 	var add_label = document.createElement('li');
+// 	add_label.setAttribute('id', 'add_label');
+// 	var p = document.createElement('p');
+// 	p.textContent = "+";
+// 	add_label.appendChild(p);
+
+// 	add_label.addEventListener('click', function(e) {
+// 		showLabelDropDown(card, add_label);
+// 	});
+
+// 	add_label.addEventListener('mouseout', function(e) {
+// 		if (!(e.target.parentElement === add_label) && !(e.target.parentElement.parentElement === add_label)) {
+// 			clearList(card);
+// 			makeAddButton(card);
+// 		}
+// 	});
+// 	return add_label;
+// }
+
+// function showLabelDropDown(card) {
+// 	var labels_to_add = [];
+// 	for (i in all_labels) {
+// 		var add = true;
+// 		for (j in card.labels) {
+// 			if ((all_labels[i].name === card.labels[j].name) && (all_labels[i].color === card.labels[j].color)) {
+// 				add = false;
+// 			}
+// 		}
+// 		if (add) {
+// 			labels_to_add.push(all_labels[i]);
+// 		}
+// 	}
+
+
+// 	$('#labels_to_add').html('');
+// 	for (l in labels_to_add) {
+// 		var label_option = $(`<li class="card_label">${labels_to_add[l].name}</li>`)
+// 		label_option.css('background-color', labels_to_add[l].color);
+// 		$('#labels_to_add').append(label_option);
+
+// 		// li.addEventListener('click', function(e) {
+// 		// 	var new_label = new Label(e.target.textContent, e.target.style.backgroundColor);
+// 		// 	card.labels.push(new_label);
+// 		// 	clearList(card);
+// 		// 	addLabel(card, new_label);
+			
+// 		// });	
+// 	}
+// 	// add_label.appendChild(ul);
+// };
+
+// function fillCard(card) {
+// 	$('#card_title').text(card.title);
+// 	$('#category_name').text(card.category);
+// 	$('#text_description').text(card.description);
+
+// 	var card_labels = $('#card_labels');
+// 	card_labels.html('');
+
+// 	for (var j in card.labels) {
+// 		var new_label = $(`<li class="card_label">${card.labels[j].name}</li>`);
+// 		new_label.css('background-color', card.labels[j].color);
+// 		card_labels.append(new_label);
+// 	}
+
+// 	if (card.labels.length < all_labels.length) {
+// 		var add_btn = $('<li id="add_label"/>');		
+// 		var plus_sign = $('<p>+</p>');
+// 		add_btn.append(plus_sign);
+
+// 		card_labels.append(add_btn);
+// 	}
+
+
+	// document.querySelector('#modal h3').textContent = card.title;
+	// document.querySelector('#category_name').textContent  = card.category;
+	// document.querySelector('#text_description').textContent = card.description;
+
+	// var label_list = document.querySelector("#modal ul");
+	// label_list.innerHTML = '';
+
+	// for (var j in card.labels) {
+	// 	var li = document.createElement('li');
+	// 	li.style.backgroundColor = card.labels[j].color;
+	// 	li.setAttribute('class', 'card_label');
+	// 	li.textContent = card.labels[j].name;
+
+	// 	label_list.appendChild(li);
+	// }
+
+	// if (card.labels.length < all_labels.length) {
+	// 	var add_label = makeAddButton(card);
+	// 	label_list.appendChild(add_label);
+	// }
+// }
+
+
 /* //////     /////////   DUMMY DATA    /////////    ////// */
 
 
@@ -88,370 +226,50 @@ var all_cards = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15];
 var all_categories = [cat0, cat1, cat2, cat3, cat4];
 
 
-
-
-for (var i in all_categories) {
-	addCategory(all_categories[i], i);
-	// for (var j in cats[i].card_list) {
-	// 	addCard(cats[i].id);
-	// }
-}
-
-function addCardButton(cat_li, card, category_index, card_index) {
-	var card_button_li = document.createElement('li');
-	card_button_li.setAttribute('class', 'card_button');
-	card_button_li.setAttribute('data-category-index', category_index);
-	card_button_li.setAttribute('data-card-index', card_index);
-	
-	var delete_button = document.createElement('a');
-	delete_button.setAttribute('class', 'delete_card');
-	delete_button.textContent = "x";
-	card_button_li.appendChild(delete_button);
-
-	var ul = document.createElement('ul');
-	ul.setAttribute('class', 'features');
-	ul.setAttribute('data-category-index', category_index);
-	ul.setAttribute('data-card-index', card_index);
-	for (var i in card.labels) {
-		var li = document.createElement('li');
-		li.style.backgroundColor = card.labels[i].color;
-		li.setAttribute('data-category-index', category_index);
-		li.setAttribute('data-card-index', card_index);
-		ul.appendChild(li);
-	}
-
-	var p = document.createElement('p');
-	p.setAttribute('class', 'card_title');
-	p.textContent = card.title;
-	p.setAttribute('data-category-index', category_index);
-	p.setAttribute('data-card-index', card_index);
-
-	card_button_li.appendChild(ul);
-	card_button_li.appendChild(p);
-
-	cat_li.children[1].appendChild(card_button_li);
-}
-
 function addCategory(category, index) {
-	var lol = document.querySelector("#lol");
-	var li = document.createElement('li');
-	li.setAttribute('data-category-index', index);
+	var lol = $('#lol');
+	var category_li = $('<li class="category_li"/>');
 
-	var p = document.createElement('p');
-	p.setAttribute('class', 'category');
-	p.textContent = category.title;
-
-	var ul = document.createElement('ul');
-	ul.setAttribute('class', 'card_list');
+	var title = $(`<p class="category">${category.title}</p>`);
+	var card_list = $('<ul class="card_list"/>');
+	var add_card_button = $('<a class="add_content">Add new card...</a>');
 	
-	var a = document.createElement('a');
-	a.setAttribute('class','add_content');
-	a.setAttribute('data-category-index', index);
-	a.textContent = "Add new card...";
+	var new_card_div = $('<div class="new_content" style="display: none;"/>');
+	var form = $('<form/>');
+	var title_input = $('<input type="text" class="title_input" placeholder="Enter card title..." required/>');
+	var submit_button = $('<button class="add_card_button">Add</button>');
+	var cancel_button = $('<a class="cancel_new_button">Cancel</a>');
+	form.append(title_input).append(submit_button);
 	
-	var new_card_div = document.createElement('div');
-	new_card_div.setAttribute('class', 'new_content');
-	new_card_div.setAttribute('data-category-index', index);
-	var form = document.createElement('form');
-	var title_input = document.createElement('input');
-	title_input.setAttribute('type', 'text');
-	title_input.setAttribute('class', 'title_input');
-	title_input.setAttribute('data-category-index', index);
-	title_input.required = true;
-	form.appendChild(title_input);
-	var submit_button = document.createElement('button');
-	submit_button.setAttribute('class', 'add_card_button');
-	submit_button.textContent = "Add";
+	new_card_div.append(form).append(cancel_button);
+	category_li.append(title).append(card_list).append(add_card_button).append(new_card_div);
 
-	form.appendChild(submit_button);
-	var cancel_button = document.createElement('a');
-	cancel_button.setAttribute('class','cancel_new_button');
-	cancel_button.textContent = "Cancel";
-	// cancel_button.addEventListener('click', function(e) {
-	// 	resetAddButton(e.target.parentElement);
-	// });
-	new_card_div.appendChild(form);
-	new_card_div.appendChild(cancel_button);
-	new_card_div.style.display = "none";
-
-	li.appendChild(p);
-	li.appendChild(ul);
-	li.appendChild(a);
-	li.appendChild(new_card_div);
-	
-	// li.style.height = "80px"; //JUST PLUS 80
-
-	var before = document.querySelector("#lol > li:last-child");
-	lol.insertBefore(li, before);
+	$('#add_category_li').before(category_li);
 
 	if(category.card_list.length > 0) {
 		for (var i in category.card_list) {
-			addCardButton(li, category.card_list[i], index, i);
+			card_list.append(makeCardButton(category.card_list[i]));
 		}
 	}
 }
 
+function makeCardButton(card) {
+	var card_button_li = $("<li class='card_button'/>");
+	var delete_button = $("<a class='delete_card'>x</a>");
+	var label_list = $("<ul class='features'/>");
+	var title = $(`<p class='card_title'>${card.title}</p>`);
 
-
-/* //////     /////////   MODAL    /////////    ////// */
-
-var close_card_button = document.querySelector("#close_card");
-var modal_bg = document.querySelector("#modal_bg");
-
-close_card_button.addEventListener('click', function(e) {
-	document.querySelector("#modal").style.display = "none";
-	resetDescription();
-	// console.log(document.querySelector('[data-category-index="0"][data-card-index="1"]'));
-});
-
-modal_bg.addEventListener('click', function(e) {
-	document.querySelector("#modal").style.display = "none";
-	resetDescription;
-});
-
-
-/* //////     /////////   LOAD CARD    /////////    ////// */
-
-function addLabel(card, label) {
-	var ul = document.querySelector("#card_labels");
-	var li = document.createElement('li');
-	li.setAttribute('class', 'card_label');
-	li.style.backgroundColor = label.color;
-	li.textContent = label.name;
-	if (card.labels.length < all_labels.length) {
-		ul.insertBefore(li, ul.lastChild);
-	} else {
-		ul.appendChild(li);
+	for (var i in card.labels) {
+		var li = $("<li/>");
+		li.css('backgroundColor', card.labels[i].color);
+		label_list.append(li);
 	}
 
-	var card_div = document.querySelector('#card');
-	var category_index = card_div.getAttribute('data-category-index');
-	var card_index = card_div.getAttribute('data-card-index');
+	card_button_li.append(delete_button);
+	card_button_li.append(label_list);
+	card_button_li.append(title);
 
-	var card_button_ul = document.querySelector('[data-category-index="'+category_index+'"][data-card-index="'+card_index+'"][class="features"]');
-	var button_li = document.createElement('li');
-	button_li.setAttribute('data-category-index', category_index);
-	button_li.setAttribute('data-card-index', card_index);
-	button_li.style.backgroundColor = label.color;
-	card_button_ul.appendChild(button_li);
-};
-
-function clearList(card) {
-	var ul = document.querySelector("#card_labels");
-	ul.removeChild(ul.lastChild);
-
-	if (card.labels.length < all_labels.length) {
-		var add_label = makeAddButton(card);
-		ul.appendChild(add_label);
-	}
-}
-
-function makeAddButton(card) {
-	var add_label = document.createElement('li');
-	add_label.setAttribute('id', 'add_label');
-	var p = document.createElement('p');
-	p.textContent = "+";
-	add_label.appendChild(p);
-
-	add_label.addEventListener('click', function(e) {
-		showLabels(card, add_label);
-	});
-
-	add_label.addEventListener('mouseout', function(e) {
-		if (!(e.target.parentElement === add_label) && !(e.target.parentElement.parentElement === add_label)) {
-			clearList(card);
-			makeAddButton(card);
-		}
-	});
-	return add_label;
-}
-
-function showLabels(card, add_label) {
-	var labels_to_add = [];
-	for (i in all_labels) {
-		var add = true;
-		for (j in card.labels) {
-			if ((all_labels[i].name === card.labels[j].name) && (all_labels[i].color === card.labels[j].color)) {
-				add = false;
-			}
-		}
-		if (add) {
-			labels_to_add.push(all_labels[i]);
-		}
-	}
-	add_label.innerHTML = '';
-	add_label.style.height = labels_to_add.length*30 + "px";
-	add_label.style.width = "110px";
-	add_label.style.backgroundColor = "white";
-	add_label.style.transform = "translate(0,-5px)"
-	var ul = document.createElement('ul')
-	for (l in labels_to_add) {
-		var li = document.createElement('li');
-		li.setAttribute('class', 'card_label');
-		li.style.backgroundColor = labels_to_add[l].color;
-		// li.style.top = "-"+add_label.style.height;
-		// li.style.transform = "translate(0, " + add_label.style.height + ")";
-		// li.style.transition = "transform .5s"; 
-		li.textContent = labels_to_add[l].name;
-
-		li.addEventListener('click', function(e) {
-			var new_label = new Label(e.target.textContent, e.target.style.backgroundColor);
-			card.labels.push(new_label);
-			clearList(card);
-			addLabel(card, new_label);
-			
-		});	
-
-		ul.appendChild(li);
-	}
-	add_label.appendChild(ul);
-};
-
-function fillCard(card) {
-	document.querySelector('#modal h3').textContent = card.title;
-	document.querySelector('#category_name').textContent  = card.category;
-	document.querySelector('#text_description').textContent = card.description;
-
-	var label_list = document.querySelector("#modal ul");
-	label_list.innerHTML = '';
-
-	for (var j in card.labels) {
-		var li = document.createElement('li');
-		li.style.backgroundColor = card.labels[j].color;
-		li.setAttribute('class', 'card_label');
-		li.textContent = card.labels[j].name;
-
-		label_list.appendChild(li);
-	}
-
-	if (card.labels.length < all_labels.length) {
-		var add_label = makeAddButton(card);
-		label_list.appendChild(add_label);
-	}
-}
-
-// function cardButtonHandler(e) {
-// 	var category_index = e.target.getAttribute('data-category-index');
-// 	var card_index = $(this).parent().index($(this));
-// 	console.log($(this));
-// 	var card = all_categories[category_index].card_list[$(this).eq()];
-	
-// 	var card_div = document.querySelector('#card');
-// 	card_div.setAttribute('data-category-index', category_index);
-// 	card_div.setAttribute('data-card-index', card_index);
-
-// 	fillCard(card);
-
-// 	document.querySelector("#modal").style.display = "block";
-// };
-
-/* //////     /////////   NEW CARD    /////////    ////// */
-
-// var new_card_buttons = document.querySelectorAll(".add_card");
-
-// for (var i = 0; i < new_card_buttons.length; i++) {
-// 	new_card_buttons[i].addEventListener('click', function(e) {
-// 		var category_index = e.target.getAttribute('data-category-index');
-// 		var new_card_div = document.querySelector('[data-category-index="'+category_index+'"][class="new_card"]');
-// 		new_card_div.style.display = "block";
-// 		var new_title = document.querySelector('[data-category-index="'+category_index+'"][class="title_input"]');
-// 		new_title.focus();
-
-// 		e.target.parentElement.style.height = parseInt(e.target.parentElement.style.height,10)+35+"px";
-// 		e.target.style.display = "none";
-// 	});
-// }
-
-// function resetAddButton(new_card_div) {
-// 	new_card_div.style.display = "none";
-// 	new_card_div.firstChild.firstChild.value = "";
-// 	new_card_div.parentElement.style.height = parseInt(new_card_div.parentElement.style.height,10)-35+"px";
-	
-// 	var add_card_button = document.querySelector('[data-category-index="'+new_card_div.getAttribute('data-category-index')+'"][class="add_content"]');
-// 	add_card_button.style.display = "block";
-// }
-
-/* //////     /////////   NEW CATEGORY    /////////    ////// */
-
-
-
-// var new_cat_button = document.querySelector(".add_category");
-// var cancel_cat_button = document.querySelector("#category_cancel_button");
-// var cat_add_button = document.querySelector("#category_add_button");
-
-// new_cat_button.addEventListener('click', function(e) {
-// 	var new_cat_div = e.target.parentElement.children[1];
-// 	new_cat_div.style.display = "block";
-// 	new_cat_div.children[0].children[0].focus();
-
-// 	e.target.parentElement.style.height = "80px";
-// 	e.target.style.display = "none";
-// });
-
-// category_cancel_button.addEventListener('click', function(e) {
-// 	console.log(e.target.parentElement);
-// 	resetCatAddButton(e.target.parentElement);
-// });
-
-// category_add_button.addEventListener('click', function(e) {
-// 	var new_category = new Category(e.target.parentElement.children[0].value, []);
-// 	addCategory(new_category, all_categories.length);
-// 	all_categories.push(new_category);
-// 	resetCatAddButton(e.target.parentElement.parentElement);
-// });
-
-// function resetCatAddButton(new_cat_div) {
-// 	new_cat_div.style.display = "none";
-// 	new_cat_div.children[0].children[0].value = "";
-// 	new_cat_div.parentElement.style.height = "50px";
-	
-// 	var new_cat_button = document.querySelector('.add_content');
-// 	new_cat_button.style.display = "block";
-// }
-
-/* //////     /////////   EDIT CARD    /////////    ////// */
-
-var desc_edit_button = document.querySelector('.edit_button');
-desc_edit_button.addEventListener('click', function(e) {
-	var text_description = document.querySelector('#text_description');
-	var edit_description = document.querySelector('#editable_description');
-	edit_description.style.display = "block";
-	var text_area = document.querySelector('#editable_description textarea');
-	text_area.value = text_description.textContent;
-	text_area.style.height = text_description.offsetHeight+"px";
-	text_area.focus();
-	desc_edit_button.style.display = "none";
-	text_description.style.display = "none";
-});
-
-var desc_cancel_button = document.querySelector('#description_cancel');
-desc_cancel_button.addEventListener('click', function(e) {
-	resetDescription();
-});
-
-var desc_save_button = document.querySelector("#description_save");
-desc_save_button.addEventListener('click', function(e) {
-	// e.preventDefault();
-	var edit_description_text = document.querySelector('#edit_description_text');
-	var description_editor = document.querySelector("#editable_description");
-	var text_description = document.querySelector('#text_description');
-	text_description.style.display = "block";
-	text_description.textContent = edit_description_text.value;
-
-	var card_div = document.querySelector('#card');
-	var card = all_categories[card_div.getAttribute('data-category-index')].card_list[card_div.getAttribute('data-card-index')];
-	card.description = edit_description_text.value;
-
-	desc_edit_button.style.display = "inline-block";
-	description_editor.style.display = "none";
-});
-
-function resetDescription() {
-	var edit_description = document.querySelector('#editable_description');
-	edit_description.style.display = "none";
-	var text_description = document.querySelector('#text_description');
-	text_description.style.display = "block";
-	desc_edit_button.style.display = "inline-block";
+	return card_button_li;
 }
 
 
@@ -459,14 +277,16 @@ function resetDescription() {
 
 var lol;
 $(function() {
+	for (var i in all_categories) {
+		addCategory(all_categories[i], i);
+	}	
 	lol = $('#lol');
 	lol.on('click', '.delete_card', function(e) {
-		var to_delete = $(this).parent()
-		var category_index = to_delete.attr('data-category-index');
+		var to_delete = $(this).parent();
+		var category_index = to_delete.parent().parent().index();
 		all_categories[category_index].card_list.splice(to_delete.attr('data-card-index'), 1);
 
 		to_delete.remove();
-
 		e.stopPropagation();
   	});
 
@@ -474,22 +294,43 @@ $(function() {
   		var category_index = $(this).parent().parent().index();
 		var card_index = $(this).index();
 		var card = all_categories[category_index].card_list[card_index];
+		$('#modal').attr('data-current-category', category_index);
+		$('#modal').attr('data-current-card', card_index);
 
-		fillCard(card);
+		$('#card_title').text(card.title);
+		$('#category_name').text(card.category);
+		$('#text_description').text(card.description);
 
+		$('#card_labels').children().each(function() {
+			if ($(this)[0] !== $('#add_label_btn')[0]) {
+				$(this).remove();
+			}
+		})
+
+		for (var i in card.labels) {
+			var new_label = $(`<li class="card_label">${card.labels[i].name}</li>`);
+			new_label.css('background-color', card.labels[i].color);
+			$('#add_label_btn').before(new_label);
+		}
+
+		if (card.labels.length < all_labels.length) {
+			$('#add_label_btn').show();
+		} else {
+			$('#add_label_btn').hide();
+		}
 		$('#modal').show();
   	});
 
   	lol.on('click', '.add_card_button', function(e) {
   		var category_index = $(this).parent().parent().parent().index();
-  		var card_index = all_categories[category_index].card_list.length;
   		var title = $(this).parent().find('input')[0].value;
   		
   		var new_card = new Card(title, all_categories[category_index].title, "", []);
   		all_categories[category_index].card_list.push(new_card);
 
-  		var cat_li = $(this).parent().parent().parent()[0];
-		addCardButton(cat_li, new_card, category_index, card_index);
+  		var card_list = $(this).parent().parent().parent().children()[1];
+  		console.log(card_list);
+		card_list.appendChild(makeCardButton(new_card)[0]);
 
 		$(this).parent().parent().hide();
   		$(this).parent().parent().find('input').val("");
@@ -511,12 +352,110 @@ $(function() {
   		$(this).parent().find('.new_content').show();
   		$(this).parent().find('input').focus();
   		$(this).hide();
-  	})
+  	});
 
   	lol.on('click', '.cancel_new_button', function(e) {
   		$(this).parent().hide();
   		$(this).parent().find('input').val("");
   		$(this).parent().parent().find('.add_content').show();
-  	})
+  	});
+
+  	$('#close_card, #modal_bg').on('click', function(e) {
+  		$('#modal').hide();
+  		$('#editable_description').hide();
+  		$('#text_description').show();
+  		$('#description_edit_btn').show();
+  	});
+
+  	$('#description_cancel').on('click', function(e) {
+  		$('#editable_description').hide();
+  		$('#text_description').show();
+  		$('#description_edit_btn').show();
+  	});
+
+  	$('#description_edit_btn').on('click', function(e) {
+  		$('#editable_description').show();
+  		$('#description_edit_btn').hide();
+  		var text_desc = $('#text_description');
+  		text_desc.hide();
+  		var textarea = $('#editable_description textarea');
+
+  		textarea.val(text_desc.text());
+  		textarea.height(text_desc.height()-5);
+  		textarea.focus();
+  	});
+
+  	$('#description_save').on('click', function(e) {
+  		$('#editable_description').hide();
+  		$('#description_edit_btn').show();
+  		var text_desc = $('#text_description');
+  		text_desc.show();
+  		var textarea = $('#editable_description textarea');
+  		text_desc.text(textarea.val());
+
+		var card = all_categories[$(modal).attr('data-current-category')].card_list[$(modal).attr('data-current-card')];
+		card.description = textarea.val();
+  	});
+
+  	$('#add_label_btn').on('mouseenter', function(e) {
+  		var labels_to_add = [];
+  		var card = all_categories[$(modal).attr('data-current-category')].card_list[$(modal).attr('data-current-card')];
+		for (i in all_labels) {
+			var add = true;
+			for (j in card.labels) {
+				if ((all_labels[i].name === card.labels[j].name)) { //put back in color comparison later
+					add = false;
+				}
+			}
+			if (add) {
+				labels_to_add.push(all_labels[i]);
+			}
+		}
+
+		$('#labels_to_add').html('');
+		for (l in labels_to_add) {
+			var label_option = $(`<li class="card_label">${labels_to_add[l].name}</li>`)
+			label_option.css('background-color', labels_to_add[l].color);
+			$('#labels_to_add').append(label_option);
+		}
+
+  		$('#label_plus_sign').hide();
+  		$('#labels_to_add').show("fast");
+  	});
+
+  	$('#add_label_btn').on('mouseleave', function(e) {
+  		$('#labels_to_add').hide("fast");
+  		$('#label_plus_sign').show("fast");
+  	});
+
+  	$('#labels_to_add').on('click', '.card_label', function(e) {
+  		var curr_category = $(modal).attr('data-current-category');
+  		var curr_card = $(modal).attr('data-current-card');
+  		var card = all_categories[curr_category].card_list[curr_card];
+
+  		card.labels.push(new Label($(this).text(), $(this).css('background-color')));
+
+  		var label_li = $(`<li class="card_label">${$(this).text()}</li>`);
+  		label_li.css('background-color', $(this).css('background-color'));
+  		$('#add_label_btn').before(label_li);
+
+  		if (card.labels.length === all_labels.length) {
+			$('#add_label_btn').hide();
+		}
+
+  		$('#labels_to_add').hide();
+  		$('#label_plus_sign').show();
+
+  		var card_button_label = $('<li class="card_label">');
+  		card_button_label.css('background-color', $(this).css('background-color'));
+  		$('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
+
+
+  	});
 
 });
+
+
+
+
+

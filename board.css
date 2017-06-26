@@ -211,7 +211,7 @@ textarea {
   resize: none;
   border: 0;
   border-radius: 4px;
-  padding: 10px;
+  padding: 5px 10px;
   font-size: 13px;
   word-wrap: break-word;
 }
@@ -277,7 +277,7 @@ textarea {
   margin: 0px 5px 0px 0px;
 }
 
-#add_label {
+#add_label_btn {
   display: inline-block;
   width: 10px;
   height: 21px;
@@ -286,22 +286,23 @@ textarea {
   font-size: 18px;
   padding: 1px 8px 1px 7px;
   vertical-align: top;
-/*  transition: width .2s, height .5s .2s; */
+  /*transition: width .2s, height .5s .2s; */
+  transition: all .2s;
   position:fixed;
 
 }
 
-#add_label p {
+#label_plus_sign {
   position: relative;
   top: -2px;
 }
 
-#add_label:hover {
+#add_label_btn:hover {
   background-color: #ccc;
   cursor: pointer;
 }
 
-#add_label .card_label {
+#add_label_btn .card_label {
   width: 90px;
   display: block;
   margin: 5px 0px;
@@ -310,8 +311,19 @@ textarea {
   transition: transform 1s, top 1s;*/
 }
 
-#add_label .card_label:hover {
+#add_label_btn .card_label:hover {
   opacity: .5;
+}
+
+#labels_to_add {
+  display:none;
+  background-color: white;
+  position: relative;
+  left: -7px;
+  top: -2px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  width: 110px;
 }
 
 /* ////////     ////////    LOL AREA    ///////    ///////// */
