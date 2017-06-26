@@ -88,7 +88,7 @@ p {
   right: 0;
   background-color: #e8e8e8;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.4s;
   padding-top: 60px;
 }
 
@@ -366,9 +366,9 @@ li {
 #lol > li {
   display: inline-block;
   /*height: 670px;*/
-  width: 300px;
+  width: 280px;
   background: #e8e8e8;
-  padding: 5px 0px;
+  padding: 5px 10px;
   margin: 0 10px;
   vertical-align: top;
 }
@@ -377,12 +377,16 @@ li {
   margin-left: 0;
 }
 
+.card_list {
+  width: 280px;
+}
+
 .card_list li {
   display: block;
   width: 260px;
   height: 55px;
   background-color: white;
-  margin: 10px;
+  margin: 10px 0px;
   padding: 5px 10px 10px 10px;
 }
 
@@ -416,7 +420,7 @@ li {
 
 .add_content {
   font-size: 15px;
-  margin: 12px 20px;
+  margin: 12px 10px;
   color: #888;
   text-decoration: none;
   display: block;
@@ -477,7 +481,7 @@ li {
   background-color: #6495ED;
 }
 
-.delete_card {
+.delete_card, .delete_category{
   font-size: 13px;
   text-decoration: none;
   font-weight: lighter;
@@ -485,6 +489,7 @@ li {
   float: right;
 }
 
-.delete_card:hover {
+.delete_card:hover, .delete_category:hover {
   color: #555;
+  cursor: pointer;
 }

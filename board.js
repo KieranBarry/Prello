@@ -21,171 +21,6 @@ var Label = function(name, color) {
 }
 
 
-/* //////     /////////   MENU CONTROL    /////////    ////// */
-
-var options_button = document.querySelector('#options_button');
-var close_button = document.querySelector(".close_button");
-var dropdown_button = document.querySelector(".dropdown_button");
-
-options_button.addEventListener('click', function(e) {
-	document.querySelector("#side_menu").style.width = "250px";
-});
-
-close_button.addEventListener('click', function(e) {
-	document.querySelector("#side_menu").style.width = "0";
-});
-
-dropdown_button.addEventListener('click', function(e) {
-	var dropdown_height = document.querySelector("#drop_down").style.height;
-	if ((dropdown_height === "0px") || (dropdown_height === "")) {
-    	document.querySelector("#drop_down").style.height = "300px";
-    	document.querySelector("#down_arrow").innerHTML = "&#x25b2";
-
-	} else {
-		document.querySelector("#drop_down").style.height = "0px";
-		document.querySelector("#down_arrow").innerHTML = "&#9660";
-	}
-});
-
-
-
-/* //////     /////////   LOAD CARD    /////////    ////// */
-
-// function addLabel(card, label) {
-// 	// var modal_labels = $('#card_labels');
-// 	// var new_label = 
-
-// 	var ul = document.querySelector("#card_labels");
-// 	var li = document.createElement('li');
-// 	li.setAttribute('class', 'card_label');
-// 	li.style.backgroundColor = label.color;
-// 	li.textContent = label.name;
-// 	if (card.labels.length < all_labels.length) {
-// 		ul.insertBefore(li, ul.lastChild);
-// 	} else {
-// 		ul.appendChild(li);
-// 	}
-
-// 	var card_div = document.querySelector('#card');
-// 	var category_index = card_div.getAttribute('data-category-index');
-// 	var card_index = card_div.getAttribute('data-card-index');
-
-// 	var card_button_ul = document.querySelector('[data-category-index="'+category_index+'"][data-card-index="'+card_index+'"][class="features"]');
-// 	var button_li = document.createElement('li');
-// 	button_li.setAttribute('data-category-index', category_index);
-// 	button_li.setAttribute('data-card-index', card_index);
-// 	button_li.style.backgroundColor = label.color;
-// 	card_button_ul.appendChild(button_li);
-// };
-
-// function clearList(card) {
-// 	var ul = document.querySelector("#card_labels");
-// 	ul.removeChild(ul.lastChild);
-
-// 	if (card.labels.length < all_labels.length) {
-// 		var add_label = makeAddButton(card);
-// 		ul.appendChild(add_label);
-// 	}
-// }
-
-// function makeAddButton(card) {
-// 	var add_label = document.createElement('li');
-// 	add_label.setAttribute('id', 'add_label');
-// 	var p = document.createElement('p');
-// 	p.textContent = "+";
-// 	add_label.appendChild(p);
-
-// 	add_label.addEventListener('click', function(e) {
-// 		showLabelDropDown(card, add_label);
-// 	});
-
-// 	add_label.addEventListener('mouseout', function(e) {
-// 		if (!(e.target.parentElement === add_label) && !(e.target.parentElement.parentElement === add_label)) {
-// 			clearList(card);
-// 			makeAddButton(card);
-// 		}
-// 	});
-// 	return add_label;
-// }
-
-// function showLabelDropDown(card) {
-// 	var labels_to_add = [];
-// 	for (i in all_labels) {
-// 		var add = true;
-// 		for (j in card.labels) {
-// 			if ((all_labels[i].name === card.labels[j].name) && (all_labels[i].color === card.labels[j].color)) {
-// 				add = false;
-// 			}
-// 		}
-// 		if (add) {
-// 			labels_to_add.push(all_labels[i]);
-// 		}
-// 	}
-
-
-// 	$('#labels_to_add').html('');
-// 	for (l in labels_to_add) {
-// 		var label_option = $(`<li class="card_label">${labels_to_add[l].name}</li>`)
-// 		label_option.css('background-color', labels_to_add[l].color);
-// 		$('#labels_to_add').append(label_option);
-
-// 		// li.addEventListener('click', function(e) {
-// 		// 	var new_label = new Label(e.target.textContent, e.target.style.backgroundColor);
-// 		// 	card.labels.push(new_label);
-// 		// 	clearList(card);
-// 		// 	addLabel(card, new_label);
-			
-// 		// });	
-// 	}
-// 	// add_label.appendChild(ul);
-// };
-
-// function fillCard(card) {
-// 	$('#card_title').text(card.title);
-// 	$('#category_name').text(card.category);
-// 	$('#text_description').text(card.description);
-
-// 	var card_labels = $('#card_labels');
-// 	card_labels.html('');
-
-// 	for (var j in card.labels) {
-// 		var new_label = $(`<li class="card_label">${card.labels[j].name}</li>`);
-// 		new_label.css('background-color', card.labels[j].color);
-// 		card_labels.append(new_label);
-// 	}
-
-// 	if (card.labels.length < all_labels.length) {
-// 		var add_btn = $('<li id="add_label"/>');		
-// 		var plus_sign = $('<p>+</p>');
-// 		add_btn.append(plus_sign);
-
-// 		card_labels.append(add_btn);
-// 	}
-
-
-	// document.querySelector('#modal h3').textContent = card.title;
-	// document.querySelector('#category_name').textContent  = card.category;
-	// document.querySelector('#text_description').textContent = card.description;
-
-	// var label_list = document.querySelector("#modal ul");
-	// label_list.innerHTML = '';
-
-	// for (var j in card.labels) {
-	// 	var li = document.createElement('li');
-	// 	li.style.backgroundColor = card.labels[j].color;
-	// 	li.setAttribute('class', 'card_label');
-	// 	li.textContent = card.labels[j].name;
-
-	// 	label_list.appendChild(li);
-	// }
-
-	// if (card.labels.length < all_labels.length) {
-	// 	var add_label = makeAddButton(card);
-	// 	label_list.appendChild(add_label);
-	// }
-// }
-
-
 /* //////     /////////   DUMMY DATA    /////////    ////// */
 
 
@@ -226,10 +61,14 @@ var all_cards = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15];
 var all_categories = [cat0, cat1, cat2, cat3, cat4];
 
 
+
+/* //////     /////////   HELPER METHODS    /////////    ////// */
+
 function addCategory(category, index) {
 	var lol = $('#lol');
 	var category_li = $('<li class="category_li"/>');
 
+	var delete_button = $("<a class='delete_category'>x</a>");
 	var title = $(`<p class="category">${category.title}</p>`);
 	var card_list = $('<ul class="card_list"/>');
 	var add_card_button = $('<a class="add_content">Add new card...</a>');
@@ -242,7 +81,7 @@ function addCategory(category, index) {
 	form.append(title_input).append(submit_button);
 	
 	new_card_div.append(form).append(cancel_button);
-	category_li.append(title).append(card_list).append(add_card_button).append(new_card_div);
+	category_li.append(delete_button).append(title).append(card_list).append(add_card_button).append(new_card_div);
 
 	$('#add_category_li').before(category_li);
 
@@ -273,18 +112,20 @@ function makeCardButton(card) {
 }
 
 
-/* //////     /////////   EVENT DELEGATION    /////////    ////// */
+/* //////     /////////   EVENT HANDLING    /////////    ////// */
 
 var lol;
 $(function() {
 	for (var i in all_categories) {
 		addCategory(all_categories[i], i);
 	}	
+
 	lol = $('#lol');
+
 	lol.on('click', '.delete_card', function(e) {
 		var to_delete = $(this).parent();
 		var category_index = to_delete.parent().parent().index();
-		all_categories[category_index].card_list.splice(to_delete.attr('data-card-index'), 1);
+		all_categories[category_index].card_list.splice(to_delete.index(), 1);
 
 		to_delete.remove();
 		e.stopPropagation();
@@ -329,12 +170,18 @@ $(function() {
   		all_categories[category_index].card_list.push(new_card);
 
   		var card_list = $(this).parent().parent().parent().children()[1];
-  		console.log(card_list);
 		card_list.appendChild(makeCardButton(new_card)[0]);
 
 		$(this).parent().parent().hide();
   		$(this).parent().parent().find('input').val("");
   		$(this).parent().parent().parent().find('.add_content').show();
+  	});
+
+  	lol.on('click', '.delete_category', function(e) {
+		var to_delete = $(this).parent();
+		all_categories.splice(to_delete.index(), 1);
+
+		to_delete.remove();
   	});
 
   	lol.on('click', '.add_category_button', function(e) {
@@ -449,9 +296,25 @@ $(function() {
   		var card_button_label = $('<li class="card_label">');
   		card_button_label.css('background-color', $(this).css('background-color'));
   		$('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
-
-
   	});
+
+  	$('#options_button').on('click', function(e) {
+		$('#side_menu').width(250);
+	});
+
+	$('.close_button').on('click', function(e) {
+		$('#side_menu').width(0);
+	});
+
+	$('.dropdown_button').on('click', function(e) {
+		if ($('#drop_down').height() === 300) {
+			$('#drop_down').height(0);
+			$('#down_arrow').html("&#9660");
+		} else {
+			$('#drop_down').height(300);
+			$('#down_arrow').html("&#x25b2");
+		}
+	})
 
 });
 
