@@ -6,10 +6,9 @@ var Category = function(title, cards) {
 	};
 };
 
-var Card = function(title, category, description, labels) {
+var Card = function(title, description, labels) {
 	return {
 		title,
-		category,
 		description,
 		labels,
 		comments: ['']
@@ -34,66 +33,34 @@ var l3 = new Label("wow.", "green");
 var l4 = new Label("fun", "purple");
 var all_labels = [l0, l1, l2, l3, l4];
 
-// var c0 = new Card("Plants", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l3]);
-// c0.comments.push("plants drool.");
-// c0.comments.push("No they don't! Plants are the reason we can exist on this planet dummy");
-// var c1 = new Card("Boats", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l4]);
-// var c2 = new Card("Planes", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3]);
-// var c3 = new Card("Swords", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 3);
-// var c4 = new Card("Old Cars", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 4);
-// var c5 = new Card("Doggies", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l3,l4], 5);
-// var c6 = new Card("Settlers of Catan", "Cool Stuff!", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2,l3,l4], 6);
-// var c7 = new Card("Boxes", "Other Stuff", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l4], 7);
-// var c8 = new Card("Foxes", "Other Stuff", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l3], 8);
-// var c9 = new Card("Nickleback", "Rejects", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l2,l3], 9);
-// var c10 = new Card("N3rdz", "Rejects", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l3,l4], 10);
-// var c11 = new Card("We're Does", "Rejects", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 11);
-// var c12 = new Card("ur mom", "Rejects", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l2,l3], 12);
-// var c13 = new Card("Mosquito", "Fish", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1], 13);
-// var c14 = new Card("Elephant", "Fish", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2], 14);
-// var c15 = new Card("Trump", "Fish", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 15);
+var c0 = new Card("Plants", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l3]);
+c0.comments.push("plants drool.");
+c0.comments.push("No they don't! Plants are the reason we can exist on this planet dummy");
+var c1 = new Card("Boats", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l4]);
+var c2 = new Card("Planes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3]);
+var c3 = new Card("Swords", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 3);
+var c4 = new Card("Old Cars", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 4);
+var c5 = new Card("Doggies", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l3,l4], 5);
+var c6 = new Card("Settlers of Catan", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2,l3,l4], 6);
+var c7 = new Card("Boxes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l4], 7);
+var c8 = new Card("Foxes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l3], 8);
+var c9 = new Card("Nickleback", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l2,l3], 9);
+var c10 = new Card("N3rdz", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l3,l4], 10);
+var c11 = new Card("We're Does", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 11);
+var c12 = new Card("ur mom", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l2,l3], 12);
+var c13 = new Card("Mosquito", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1], 13);
+var c14 = new Card("Elephant", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2], 14);
+var c15 = new Card("Trump", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 15);
 
-// var cat0 = new Category("Cool Stuff!", [c0, c1, c2, c3, c4, c5, c6], 0);
-// var cat1 = new Category("Other Stuff", [c7, c8], 1);
-// var cat2 = new Category("Rejects", [c9, c10, c11, c12], 2);
-// var cat3 = new Category("Fish", [c13, c14, c15], 3);
-// var cat4 = new Category("Empty Category", [], 4);
+var cat0 = new Category("Cool Stuff!", [c0, c1, c2, c3, c4, c5, c6], 0);
+var cat1 = new Category("Other Stuff", [c7, c8], 1);
+var cat2 = new Category("Rejects", [c9, c10, c11, c12], 2);
+var cat3 = new Category("Fish", [c13, c14, c15], 3);
+var cat4 = new Category("Empty Category", [], 4);
 
-// // var all_cards = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15];
-// var all_categories = [cat0, cat1, cat2, cat3, cat4];
+// var all_cards = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15];
+var all_categories = [cat0, cat1, cat2, cat3, cat4];
 
-// var to_post = {
-// 	title: "Cool Stuff",
-// 	cards: [
-// 		{
-// 			title: "Plants",
-// 			category: "Cool Stuff!",
-// 			description: "Description",
-// 			labels: [
-// 				{
-// 					name: "bloop",
-// 					color: "red"
-// 				}, {
-// 					name: "bloop2",
-// 					color: "blue"
-// 				}
-// 			],
-// 		}, {
-// 			title: "fdsfs",
-// 			category: "Cool Stuff!",
-// 			description: "Description2",
-// 			labels: [
-// 				{
-// 					name: "bloop3",
-// 					color: "orange"
-// 				}, {
-// 					name: "bloop2",
-// 					color: "blue"
-// 				}
-// 			],
-// 		}
-// 	],
-// };
 
 
 /* //////     /////////   HELPER METHODS    /////////    ////// */
@@ -158,7 +125,7 @@ $(function() {
 
 	// 	$.ajax({
 	// 		async: false,
-	// 	    url: "http://thiman.me:1337/kb/list",
+	// 	    url: "http://localhost:3000/list",
 	// 	    dataType : "json",
 	// 	    type: "POST",
 	// 	    data: {
@@ -169,7 +136,7 @@ $(function() {
 	// 	.done(function( json ) {
 	// 		// console.log(json);
 	// 		for (var j in cards) {
-	// 			var post_url = "http://thiman.me:1337/kb/list/"+json._id+"/card/";
+	// 			var post_url = "http://localhost:3000/list/"+json._id+"/card/";
 	// 			$.ajax({
 	// 				url: post_url,
 	// 				type: "POST",
@@ -184,7 +151,7 @@ $(function() {
 	// }	
 
 	$.ajax({
-	    url: "http://thiman.me:1337/kb/list",
+	    url: "http://localhost:3000/list",
 	    dataType : "json"
 	})
 	.done(function(json) {
@@ -214,7 +181,7 @@ $(function() {
 		$('#modal').attr('data-current-card', card_index);
 
 		$('#card_title').text(card.title);
-		$('#category_name').text(card.category);
+		$('#category_name').text(all_categories[category_index].title);
 		$('#text_description').text(card.description);
 
 		$('#card_labels').children().each(function() {
@@ -246,7 +213,7 @@ $(function() {
 		e.stopPropagation();
 
 		$.ajax({
-			url: `http://thiman.me:1337/kb/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
+			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
@@ -271,13 +238,12 @@ $(function() {
 
 		var new_card = {
 	    	title,
-	    	category: all_categories[category_index].title,
 			description: "",
 			labels: [''],
 			comments: ['']
 	    };
   		$.ajax({
-		    url: `http://thiman.me:1337/kb/list/${all_categories[category_index]._id}/card`,
+		    url: `http://localhost:3000/list/${all_categories[category_index]._id}/card`,
 		    type: "POST",
 		    dataType : "json",
 		    data: new_card
@@ -297,7 +263,7 @@ $(function() {
 		var to_delete = $(this).parent();
 
 		$.ajax({
-			url: `http://thiman.me:1337/kb/list/${all_categories[to_delete.index()]._id}`,
+			url: `http://localhost:3000/list/${all_categories[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
@@ -318,7 +284,7 @@ $(function() {
   		$(this).parent().parent().parent().find('.add_content').show();
 
   		$.ajax({
-		    url: 'http://thiman.me:1337/kb/list/',
+		    url: 'http://localhost:3000/list/',
 		    type: "POST",
 		    dataType : "json",
 		    data: new_category
@@ -393,7 +359,7 @@ $(function() {
 		card.description = textarea.val();
 
 		$.ajax({
-			url: `http://thiman.me:1337/kb/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
 			data: card
 		})
@@ -460,7 +426,7 @@ $(function() {
   		$('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
 
   		$.ajax({
-			url: `http://thiman.me:1337/kb/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
+			url: `http://localhost:3000/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
 			type: "PATCH",
 			data: card
 		})
