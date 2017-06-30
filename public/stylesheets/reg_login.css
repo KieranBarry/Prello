@@ -5,26 +5,6 @@ body {
 	font-family: Helvetica;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  left:0;
-  background-color: #3D59AB;
-  height: 50px;
-  width: 100%;
-  margin: 0px;
-  vertical-align: middle;
-}
-
-h1 {
-  color: white;
-  font-weight: lighter;
-  margin: auto;
-  height: 100%;
-  text-align: center;
-  padding: 12px 0px;
-}
-
 form {
 	text-align: left;
 	margin: auto;
@@ -91,11 +71,11 @@ form {
 	margin-bottom: 25px;
 }
 
-.register {
+.login {
 	border-radius: 4px 0px 0px 4px;
 }
 
-.login {
+.register {
 	border-radius: 0px 4px 4px 0px;
 }
 

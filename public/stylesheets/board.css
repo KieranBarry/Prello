@@ -16,7 +16,7 @@ body {
 
 /* ////////     ////////    NAV BAR    ///////    ///////// */
 
-nav {
+/*nav {
   position: fixed;
   top: 0px;
   background-color: #3D59AB;
@@ -73,12 +73,12 @@ nav button:hover {
 
 p {
   margin: 0;
-}
+}*/
 
 
 /* ////////     ////////    SIDE MENU    ///////    ///////// */
 
-
+/*
 #side_menu {
   height: 100%;
   width: 0;
@@ -118,11 +118,11 @@ p {
   top: 0;
   font-size: 36px;
   margin: 0;
-}
+}*/
 
 
 /* ////////     ////////    DROPDOWN MENU    ///////    ///////// */
-
+/*
 #drop_down {
   height: 0px;
   width: 250px;
@@ -151,7 +151,7 @@ p {
 #drop_down li:hover {
   cursor: pointer;
   background-color: #6495ED;
-}
+}*/
 
 
 /* ////////     ////////    MODAL AREA    ///////    ///////// */
@@ -336,7 +336,7 @@ h2 {
   color: white;
 }
 
-ul {
+/*ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -345,7 +345,7 @@ ul {
 li {
   border-radius: 10px;
   padding: 0;
-}
+}*/
 
 .category {
   color: #333;
