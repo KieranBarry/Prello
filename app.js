@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var cors = require('cors');
+var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -19,6 +21,13 @@ db.once('open', function() {
 });
 
 var app = express();
+app.use(cors());
+// app.use(bodyParser());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+ 
+// parse application/json 
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -53,5 +62,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

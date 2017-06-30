@@ -3,32 +3,37 @@ var mongoose = require('mongoose');
 
 var router = express.Router();
 
-var Card = mongoose.model('Card', {
+var cardSchema = mongoose.Schema({
 	title: String,
 	description: String,
 	labels: Array,
 	comments: Array
 });
 
-var List = mongoose.model('List', {
+var listSchema = mongoose.Schema({
 	title: String,
-	cards: Array
+	cards: [cardSchema]
 });
+
+// var Card = mongoose.model('Card', {
+// 	title: String,
+// 	description: String,
+// 	labels: Array,
+// 	comments: Array
+// });
+
+var List = mongoose.model('List', listSchema);
 
 
 router.post('/:lid/card', function(req, res) {
-	var newCard = new Card(
-		{
-			title: req.body.title,
-			description: ""
-		}
-	);
-
 	List.findById(req.params.lid, function(err, list) {
 		if (err) {
-			console.log(error);
+			console.log(err);
 		} else {
-			list.cards.push(newCard);
+			// var card_desc = req.body.description || "";
+			// var card_labels = req.body.labels || [];
+			// var card_comments = req.body.comments || [];
+			list.cards.push(req.body);
 			list.save(function(err, list) {
 				if (err) {
 					console.log(err);
@@ -40,14 +45,12 @@ router.post('/:lid/card', function(req, res) {
 	});
 });
 
-
-// not working
 router.delete('/:lid/card/:cid', function(req, res) {
 	List.findById(req.params.lid, function(err, list) {
 		if (err) {
-			console.log(error);
+			console.log(err);
 		} else {
-			list.cards.push(newCard);
+			list.cards.pull(req.params.cid);
 			list.save(function(err, list) {
 				if (err) {
 					console.log(err);
@@ -59,7 +62,29 @@ router.delete('/:lid/card/:cid', function(req, res) {
 	});
 });
 
+router.patch('/:lid/card/:cid', function(req, res) {
+	List.findById(req.params.lid, function(err, list) {
+		if (err) {
+			console.log(err);
+		} else {
+			var card = list.cards.id(req.params.cid)
+			card.title = req.body.title || card.title;
+			card.description = req.body.description || card.description;
+			card.labels = req.body.labels || card.labels;
+			card.comments = req.body.comments || card.comments;
 
+			console.log(req.body.labels)
+
+			list.save(function(err, list) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.json(list);
+				}
+			});
+		}
+	});
+});
 
 
 router.get('/', function(req, res) {
@@ -88,7 +113,7 @@ router.post('/', function(req, res) {
 });
 
 router.delete('/:lid', function(req, res) {
-	List.findByIdAndRemove(req.params.lid, function(err, list) {
+	List.findByIdAndRemove(req.params.lid, function(err) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -98,10 +123,9 @@ router.delete('/:lid', function(req, res) {
 });
 
 router.patch('/:lid', function(req, res) {
-	console.log(req.params.lid);
 	List.findById(req.params.lid, function(err, list) {
 		if (err) {
-			console.log(error);
+			console.log(err);
 		} else {
 			list.title = req.body.title || list.title;
 			list.cards = req.body.cards || list.cards;

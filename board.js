@@ -33,33 +33,33 @@ var l3 = new Label("wow.", "green");
 var l4 = new Label("fun", "purple");
 var all_labels = [l0, l1, l2, l3, l4];
 
-var c0 = new Card("Plants", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l3]);
-c0.comments.push("plants drool.");
-c0.comments.push("No they don't! Plants are the reason we can exist on this planet dummy");
-var c1 = new Card("Boats", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l4]);
-var c2 = new Card("Planes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3]);
-var c3 = new Card("Swords", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 3);
-var c4 = new Card("Old Cars", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 4);
-var c5 = new Card("Doggies", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l3,l4], 5);
-var c6 = new Card("Settlers of Catan", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2,l3,l4], 6);
-var c7 = new Card("Boxes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l4], 7);
-var c8 = new Card("Foxes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l3], 8);
-var c9 = new Card("Nickleback", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l2,l3], 9);
-var c10 = new Card("N3rdz", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l3,l4], 10);
-var c11 = new Card("We're Does", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 11);
-var c12 = new Card("ur mom", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l2,l3], 12);
-var c13 = new Card("Mosquito", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1], 13);
-var c14 = new Card("Elephant", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2], 14);
-var c15 = new Card("Trump", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 15);
+// var c0 = new Card("Plants", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l3]);
+// c0.comments.push("plants drool.");
+// c0.comments.push("No they don't! Plants are the reason we can exist on this planet dummy");
+// var c1 = new Card("Boats", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l4]);
+// var c2 = new Card("Planes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3]);
+// var c3 = new Card("Swords", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 3);
+// var c4 = new Card("Old Cars", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3,l4], 4);
+// var c5 = new Card("Doggies", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l3,l4], 5);
+// var c6 = new Card("Settlers of Catan", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2,l3,l4], 6);
+// var c7 = new Card("Boxes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l2,l4], 7);
+// var c8 = new Card("Foxes", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l3], 8);
+// var c9 = new Card("Nickleback", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l2,l3], 9);
+// var c10 = new Card("N3rdz", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l3,l4], 10);
+// var c11 = new Card("We're Does", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 11);
+// var c12 = new Card("ur mom", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1,l2,l3], 12);
+// var c13 = new Card("Mosquito", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l1], 13);
+// var c14 = new Card("Elephant", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l2], 14);
+// var c15 = new Card("Trump", "This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.", [l0,l1,l3], 15);
 
-var cat0 = new Category("Cool Stuff!", [c0, c1, c2, c3, c4, c5, c6], 0);
-var cat1 = new Category("Other Stuff", [c7, c8], 1);
-var cat2 = new Category("Rejects", [c9, c10, c11, c12], 2);
-var cat3 = new Category("Fish", [c13, c14, c15], 3);
-var cat4 = new Category("Empty Category", [], 4);
+// var cat0 = new Category("Cool Stuff!", [c0, c1, c2, c3, c4, c5, c6], 0);
+// var cat1 = new Category("Other Stuff", [c7, c8], 1);
+// var cat2 = new Category("Rejects", [c9, c10, c11, c12], 2);
+// var cat3 = new Category("Fish", [c13, c14, c15], 3);
+// var cat4 = new Category("Empty Category", [], 4);
 
-// var all_cards = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15];
-var all_categories = [cat0, cat1, cat2, cat3, cat4];
+// // var all_cards = [c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15];
+// var all_categories = [cat0, cat1, cat2, cat3, cat4];
 
 
 
@@ -140,13 +140,18 @@ $(function() {
 	// 			$.ajax({
 	// 				url: post_url,
 	// 				type: "POST",
-	// 				data: cards[j],
+	// 				data: JSON.stringify(cards[j]),
+	// 				contentType: 'application/json',
 	// 				dataType: "json"
 	// 			})
 	// 			.done(function(json) {
 	// 				console.log(json);
 	// 			});
 	// 		}
+	// 	})
+	// 	.fail(function(err) {
+	// 		console.log(err);
+	// 		// alert("fail fail fail");
 	// 	});	
 	// }	
 
@@ -163,8 +168,6 @@ $(function() {
 	.fail(function() {
 		alert("You're latest Ajax request failed.");
 	});
-
-
 
 
 	lol = $('#lol');
@@ -221,8 +224,8 @@ $(function() {
 			all_categories[category_index].cards.splice(to_delete.index(), 1);
 			to_delete.remove();
 		})
-		.fail(function() {
-			alert("You're latest Ajax request failed.");
+		.fail(function(e) {
+			console.log(e);
 		});
   	});
 
@@ -235,6 +238,11 @@ $(function() {
   		$(this).parent().parent().hide();
   		$(this).parent().parent().find('input').val("");
   		$(this).parent().parent().parent().find('.add_content').show();
+
+  		console.log("here");
+  		console.log(category_index);
+  		console.log(all_categories[category_index]);
+  		console.log(all_categories[category_index]._id);
 
 		var new_card = {
 	    	title,
@@ -253,8 +261,8 @@ $(function() {
   			all_categories[category_index].cards.push(new_card);
 			card_list.append(makeCardButton(new_card)[0]);
 		})
-		.fail(function() {
-			alert("You're latest Ajax request failed.");
+		.fail(function(e) {
+			console.log(e);
 		});
   	});
 
@@ -268,11 +276,12 @@ $(function() {
 
 		})
 		.done(function() {
+			console.log()
 			all_categories.splice(to_delete.index(), 1);
 			to_delete.remove();
 		})
-		.fail(function() {
-			alert("You're latest Ajax request failed.");
+		.fail(function(e) {
+			console.log(e);
 		});
   	});
 
@@ -295,8 +304,8 @@ $(function() {
 			all_categories.push(new_category);
 			addCategory(new_category, all_categories.length);
 		})
-		.fail(function() {
-			alert("You're latest Ajax request failed.");
+		.fail(function(e) {
+			console.log(e);
 		});
   	});
 
@@ -361,10 +370,11 @@ $(function() {
 		$.ajax({
 			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
-			data: card
+			data: JSON.stringify(card),
+			contentType: 'application/json'
 		})
-		.fail(function() {
-			alert("You're latest Ajax request failed.");
+		.fail(function(e) {
+			console.log(e);
 		});
   	});
 
@@ -428,10 +438,11 @@ $(function() {
   		$.ajax({
 			url: `http://localhost:3000/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
 			type: "PATCH",
-			data: card
+			data: JSON.stringify(card),
+			contentType: 'application/json'
 		})
-		.fail(function() {
-			alert("You're latest Ajax request failed.");
+		.fail(function(e) {
+			console.log(e);
 		});
   	});
 
