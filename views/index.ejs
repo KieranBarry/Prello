@@ -1,11 +1,49 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include header.ejs %>
+	<h2>Board Name</h2>
+	<div id="lol_container">
+		<ul id="lol">
+			<li id="add_category_li">
+				<a href="#" class="add_content">Add new category...</a>
+				<div class="new_content" style="display: none;">
+					<form>
+						<input type="text" id="category_title_input" class="title_input" placeholder="Enter Category Name">
+						<button id="category_add_button" class="add_category_button">Add</button>
+					</form>
+					<a id="category_cancel_button" class="cancel_new_button">Cancel</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
+	<div id="modal" data-current-category="1" data-current-card="1">
+		<div id="modal_bg"></div>
+		<div id="card">
+			<a href="#" id="close_card" class="close_button">&times;</a>
+			<h3 id="card_title">Card Name</h3>
+			<p class="subtitle">in <span id="category_name">Category Name</span></p>
+			<ul id="card_labels">
+				<li id="add_label_btn">
+					<p id="label_plus_sign">+</p>
+					<ul id="labels_to_add"></ul>
+				</li>
+			</ul>
+			<p class="subtitle">Description</p>
+			<a href="#" class="edit_button" id="description_edit_btn">Edit</a>
+			<p id="text_description">This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.</p>
+			<div id="editable_description">
+				<form>
+					<textarea placeholder="Write a description..." id="edit_description_text"></textarea>
+					<button id="description_save" class="save_button">Save</button>
+				</form>
+				<a href="#" class="cancel_button" id="description_cancel">Cancel</a>
+			</div>
+			<h4>Comments</h4>
+			<form>
+				<textarea placeholder="Write a comment..."></textarea>
+				<button class="save_button">Save</button>
+			</form>
+			<a href="#" class="cancel_button">Cancel</a>
+		</div>
+	</div>
+<%- include footer.ejs %>

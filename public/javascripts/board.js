@@ -239,16 +239,9 @@ $(function() {
   		$(this).parent().parent().find('input').val("");
   		$(this).parent().parent().parent().find('.add_content').show();
 
-  		console.log("here");
-  		console.log(category_index);
-  		console.log(all_categories[category_index]);
-  		console.log(all_categories[category_index]._id);
-
 		var new_card = {
 	    	title,
-			description: "",
-			labels: [''],
-			comments: ['']
+	    	description: ""
 	    };
   		$.ajax({
 		    url: `http://localhost:3000/list/${all_categories[category_index]._id}/card`,
@@ -257,7 +250,7 @@ $(function() {
 		    data: new_card
 		})
 		.done(function(json) {
-			new_card._id = json.cards[json.cards.length - 1];
+			new_card = json.cards[json.cards.length - 1];
   			all_categories[category_index].cards.push(new_card);
 			card_list.append(makeCardButton(new_card)[0]);
 		})
@@ -370,8 +363,7 @@ $(function() {
 		$.ajax({
 			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
-			data: JSON.stringify(card),
-			contentType: 'application/json'
+			data: card,
 		})
 		.fail(function(e) {
 			console.log(e);
@@ -438,8 +430,7 @@ $(function() {
   		$.ajax({
 			url: `http://localhost:3000/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
 			type: "PATCH",
-			data: JSON.stringify(card),
-			contentType: 'application/json'
+			data: card
 		})
 		.fail(function(e) {
 			console.log(e);

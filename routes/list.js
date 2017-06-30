@@ -1,28 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var List = require('../models/list_model');
 
 var router = express.Router();
-
-var cardSchema = mongoose.Schema({
-	title: String,
-	description: String,
-	labels: Array,
-	comments: Array
-});
-
-var listSchema = mongoose.Schema({
-	title: String,
-	cards: [cardSchema]
-});
-
-// var Card = mongoose.model('Card', {
-// 	title: String,
-// 	description: String,
-// 	labels: Array,
-// 	comments: Array
-// });
-
-var List = mongoose.model('List', listSchema);
 
 
 router.post('/:lid/card', function(req, res) {
@@ -30,9 +10,6 @@ router.post('/:lid/card', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			// var card_desc = req.body.description || "";
-			// var card_labels = req.body.labels || [];
-			// var card_comments = req.body.comments || [];
 			list.cards.push(req.body);
 			list.save(function(err, list) {
 				if (err) {
@@ -72,8 +49,6 @@ router.patch('/:lid/card/:cid', function(req, res) {
 			card.description = req.body.description || card.description;
 			card.labels = req.body.labels || card.labels;
 			card.comments = req.body.comments || card.comments;
-
-			console.log(req.body.labels)
 
 			list.save(function(err, list) {
 				if (err) {
