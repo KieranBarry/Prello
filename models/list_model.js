@@ -12,6 +12,4 @@ var listSchema = mongoose.Schema({
 	cards: [cardSchema]
 });
 
-// var List = mongoose.model('List', listSchema);
-
 module.exports = mongoose.model('List', listSchema);

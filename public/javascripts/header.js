@@ -18,5 +18,18 @@ $(function(){
 			$('#down_arrow').html("&#x25b2");
 		}
 	});
+
+	$('#logout_button').click(function(e) {
+		$.ajax({
+			url: 'http://localhost:3000/logout'
+		})
+		.done(function() {
+			console.log("logged out");
+			window.location.href = '/';
+		})
+		.fail(function(e) {
+			console.log(e);
+		});
+	})
 });
 

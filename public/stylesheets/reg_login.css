@@ -14,14 +14,14 @@ form {
 	font-size: 15px;
 }
 
-p {
-	margin: 0px 0px 0px 2px;
+label p {
+	margin: 15px 0px 0px 2px;
 }
 
 input[type=email], input[type=password] {
 	width: 100%;
 	display: inline-block;
-	margin: 5px 0px 20px 0px;
+	margin: 5px 0px 5px 0px;
 	border:1px solid #bbb;
 	border-radius: 4px;
 	padding: 8px;
@@ -43,7 +43,7 @@ button {
 }
 
 button[type=submit] {
-	margin-top: 5px;
+	margin-top: 20px;
 }
 
 button[type=submit]:hover {
@@ -98,4 +98,8 @@ form {
 
 .inactive + .register {
 	border-right: 0px;
+}
+
+.error_msg {
+	color: red;
 }
