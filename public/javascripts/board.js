@@ -184,10 +184,16 @@ $(function() {
 		$('#modal').attr('data-current-category', category_index);
 		$('#modal').attr('data-current-card', card_index);
 
+
 		$('#card_title').text(card.title);
 		$('#category_name').text(all_categories[category_index].title);
 		$('#text_description').text(card.description);
-		$('#creator').text(card.creator);
+		if(card.creator) {
+			$('#created_by').show();
+			$('#creator').text(card.creator);
+		} else {
+			$('#created_by').hide();
+		}
 
 		$('#card_labels').children().each(function() {
 			if ($(this)[0] !== $('#add_label_btn')[0]) {
