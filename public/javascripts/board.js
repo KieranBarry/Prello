@@ -114,6 +114,15 @@ function makeCardButton(card) {
 }
 
 
+function addComment(comment) {
+	var li = $('<li class="card_comment"/>');
+	var user = $(`<p class="comment_author">${comment.username}</p>`);
+	var date = $(`<p class="comment_date">${new Date(comment.date)}</p>`);
+	var text = $(`<p class="card_text">${comment.text}</p>`);
+	li.append(user).append(date).append(text);
+	$('#comment_list').append(li);
+}
+
 var all_categories = [];
 
 var lol;
@@ -199,17 +208,20 @@ $(function() {
 			if ($(this)[0] !== $('#add_label_btn')[0]) {
 				$(this).remove();
 			}
-		})
-
-		// for (var i in card.comments) {
-		// 	var new_comment  = $(`<li class="card_comment">${card.labels[i].text}</li>`;
-		// }
+		});
 
 		for (var i in card.labels) {
 			if (card.labels[i] === "") {continue;}
 			var new_label = $(`<li class="card_label">${card.labels[i].name}</li>`);
 			new_label.css('background-color', card.labels[i].color);
 			$('#add_label_btn').before(new_label);
+		}
+
+		$('#comment_list').empty();
+
+		for (var i in card.comments) {
+			if (card.comments[i] === "") {continue;}
+			addComment(card.comments[i])
 		}
 
 		if (card.labels.length < all_labels.length) {
@@ -400,25 +412,31 @@ $(function() {
   	});
 
   	$('#comment_save').on('click', function(e) {
-  // 		var category_index = $(modal).attr('data-current-category');
-  // 		var card_index = $(modal).attr('data-current-card');
+  		var category_index = $(modal).attr('data-current-category');
+  		var card_index = $(modal).attr('data-current-card');
 
-		// var card = all_categories[category_index].cards[card_index];
-		// card.description = textarea.val();
+		var card = all_categories[category_index].cards[card_index];
+		var new_comment = {
+			text: $('#add_comment textarea').val(),
+			username: $('meta[name="username"]').attr('content'),
+			date: new Date()
+		}
 
-		// $('#add_comment').hide();
-  // 		$('#add_comment_btn').show();
-  // 		add_comment($('#add_comment textarea').val();)
-  // 		$('#add_comment textarea').val("");
+		card.comments.push(new_comment);
+		addComment(new_comment);
 
-		// $.ajax({
-		// 	url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
-		// 	type: "PATCH",
-		// 	data: card,
-		// })
-		// .fail(function(e) {
-		// 	console.log(e);
-		// });
+		$('#add_comment').hide();
+  		$('#add_comment_btn').show();
+  		$('#add_comment textarea').val("");
+
+		$.ajax({
+			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			type: "PATCH",
+			data: card,
+		})
+		.fail(function(e) {
+			console.log(e);
+		});
   	});
 
 

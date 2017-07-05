@@ -258,11 +258,12 @@ textarea {
   color: #555;
 }
 
-#text_description {
+.card_text {
   white-space: normal;
   margin: 5px 1px;
   font-family: Times;
   font-size: 16px;
+  clear: both;
 }
 
 .cancel_button {
@@ -503,3 +504,29 @@ li {
   color: #555;
   cursor: pointer;
 }
+
+.card_comment {
+  background-color: white;
+  margin: 5px 0px;
+  padding: 7px 10px;
+  border-radius: 4px;
+}
+
+.comment_author {
+  font-size: 14px;
+  font-weight: 600;
+  float:left;
+}
+    
+.comment_date {
+  margin: 3px 0px 0px 0px;
+  color: #888;
+  font-size: 10px;
+  display: inline-block;
+  float: right;
+}
+
+.card_comment .card_text {
+  margin: 20px 0px 0px 0px;
+}
+
