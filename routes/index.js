@@ -1,18 +1,16 @@
 var express = require('express');
+var authCheck = require('../authCheck');
 var router = express.Router();
 
-function requireLogin (req, res, next) {
-  if (!req.user) {
-    res.redirect('/users');
-  } else {
-    next();
-  }
-};
-
 /* GET home page. */
-router.get('/', requireLogin, function(req, res, next) {
+router.get('/', authCheck, function(req, res, next) {
 	console.log(req.session.user);
   	res.render('index', { title: 'Prello Board', stylesheet: 'stylesheets/board.css', javascript: 'javascripts/board.js' });
+});
+
+router.get('/logout', function(req, res) {
+  req.session.reset();
+  res.redirect('/users');
 });
 
 module.exports = router;

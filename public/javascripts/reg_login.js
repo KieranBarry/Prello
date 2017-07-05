@@ -1,50 +1,29 @@
 $(function() {
-	$('#register').hide();
+	if ($('#email_error').text() !== "") {
+		$('#login').hide();
+		$('#reg_email').focus();
+	} else {
+		$('#register').hide();
+		if ($('#login_error').text() !== "") {
+			$('#login_form input').css('borderColor', 'red');
+			$('#login_email').focus();
+		}
+	}
+
+
 	$('#register_form').on('submit', function(e) {
-		e.preventDefault();
+		// e.preventDefault();
 		if(reg_password.value !== reg_confirm.value) {
-			alert("Passwords ain't da same");
-		} else {
-			$.ajax({
-			    url: 'http://localhost:3000/users/register',
-			    type: "POST",
-			    data: {
-			    	email: reg_email.value,
-			    	password: reg_password.value
-			    }
-			})
-			.done(function() {
-				window.location.href="/";
-			})
-			.fail(function(e) {
-				console.log(e);
-			});
+			$('#register_error').text('Passwords do not match');
+			e.preventDefault();
+			$('#register_form input[type="password"]').css('borderColor', 'red');
+			// $('#reg_password').focus();
 		}
 	});
 
-	$('#login_form').on('submit', function(e) {
-		e.preventDefault();
-		$.ajax({
-		    url: 'http://localhost:3000/users/login',
-		    type: "POST",
-		    data: {
-		    	email: login_email.value,
-		    	password: login_password.value
-		    }
-		})
-		.done(function(res) {
-			if (res.msg) {
-				$('.error_msg').text(res.msg);
-				$('#login_form input').css('borderColor', 'red');
-			} else {
-				console.log('reloading');
-				window.location.href="/";
-			}
-		})
-		.fail(function(e) {
-			console.log(e);
-		});
-	});
+	// $('#login_form').on('submit', function(e) {
+	// 	console.log(e);
+	// });
 
 	$('.inactive').on('click', function(e) {
 		e.preventDefault();

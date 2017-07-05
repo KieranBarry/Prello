@@ -50,9 +50,8 @@ app.use(function(req, res, next) {
         req.user = user;
         delete req.user.password; // delete the password from the session
         req.session.user = user;  //refresh the session value
-        res.locals.user = user;
+        // res.locals.user = user;
       }
-      // finishing processing the middleware and run the route
       next();
     });
   } else {
@@ -63,11 +62,6 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 app.use('/list', list);
-
-app.get('/logout', function(req, res) {
-  req.session.reset();
-  res.redirect('/users');
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
