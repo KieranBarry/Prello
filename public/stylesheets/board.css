@@ -170,9 +170,14 @@ p {
   top:0;
 }
 
-#editable_description {
-  display: none;
+#created_by {
+  float: right;
+  /*margin-top: 10px;*/
 }
+
+/*#editable_description {
+  display: none;
+}*/
 
 #card {
   position: fixed;
@@ -201,8 +206,12 @@ h3 {
 
 h4 {
   font-size: 18px;
-  margin: 25px 0px 10px 0px;
+  margin: 25px 0px 0px 0px;
   clear: both;
+}
+
+#add_comment {
+  margin-top: 10px;
 }
 
 textarea {

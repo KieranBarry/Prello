@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+
 <%- include header.ejs %>
 	<h2>Board Name</h2>
 	<div id="lol_container">
@@ -20,6 +23,7 @@
 		<div id="modal_bg"></div>
 		<div id="card">
 			<a href="#" id="close_card" class="close_button">&times;</a>
+			<p class="subtitle" id="created_by">created by <span id="creator"></span></p>
 			<h3 id="card_title">Card Name</h3>
 			<p class="subtitle">in <span id="category_name">Category Name</span></p>
 			<ul id="card_labels">
@@ -32,18 +36,18 @@
 			<a href="#" class="edit_button" id="description_edit_btn">Edit</a>
 			<p id="text_description">This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.</p>
 			<div id="editable_description">
-				<form>
-					<textarea placeholder="Write a description..." id="edit_description_text"></textarea>
-					<button id="description_save" class="save_button">Save</button>
-				</form>
+				<textarea placeholder="Write a description..." id="edit_description_text"></textarea>
+				<button id="description_save" class="save_button">Save</button>
 				<a href="#" class="cancel_button" id="description_cancel">Cancel</a>
 			</div>
 			<h4>Comments</h4>
-			<form>
+			<ul id="comment_list"></ul>
+			<a href="#" class="edit_button" id="add_comment_btn">Add comment...</a>
+			<div id="add_comment">
 				<textarea placeholder="Write a comment..."></textarea>
-				<button class="save_button">Save</button>
-			</form>
-			<a href="#" class="cancel_button">Cancel</a>
+				<button class="save_button" id="comment_save">Save</button>
+				<a href="#" class="cancel_button" id="comment_cancel">Cancel</a>
+			</div>
 		</div>
 	</div>
 <%- include footer.ejs %>

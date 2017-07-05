@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
         req.user = user;
         delete req.user.password; // delete the password from the session
         req.session.user = user;  //refresh the session value
-        // res.locals.user = user;
+        res.locals.user = user;
       }
       next();
     });

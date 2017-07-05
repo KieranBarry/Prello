@@ -119,6 +119,7 @@ var all_categories = [];
 var lol;
 $(function() {
 
+
 	// fill in current data
 	// for (var i in all_categories) {
 	// 	var cards = all_categories[i].cards;
@@ -186,12 +187,17 @@ $(function() {
 		$('#card_title').text(card.title);
 		$('#category_name').text(all_categories[category_index].title);
 		$('#text_description').text(card.description);
+		$('#creator').text(card.creator);
 
 		$('#card_labels').children().each(function() {
 			if ($(this)[0] !== $('#add_label_btn')[0]) {
 				$(this).remove();
 			}
 		})
+
+		// for (var i in card.comments) {
+		// 	var new_comment  = $(`<li class="card_comment">${card.labels[i].text}</li>`;
+		// }
 
 		for (var i in card.labels) {
 			if (card.labels[i] === "") {continue;}
@@ -205,6 +211,8 @@ $(function() {
 		} else {
 			$('#add_label_btn').hide();
 		}
+		$('#editable_description').hide();
+		$('#add_comment').hide();
 		$('#modal').show();
   	});
 
@@ -239,8 +247,10 @@ $(function() {
   		$(this).parent().parent().find('input').val("");
   		$(this).parent().parent().parent().find('.add_content').show();
 
+
 		var new_card = {
 	    	title,
+	    	creator: $('meta[name="username"]').attr('content'),
 	    	description: ""
 	    };
   		$.ajax({
@@ -369,6 +379,42 @@ $(function() {
 			console.log(e);
 		});
   	});
+
+
+  	$('#add_comment_btn').on('click', function(e) {
+  		$('#add_comment').show();
+  		$('#add_comment_btn').hide();
+  		$('#add_comment textarea').focus();
+  	});
+
+  	$('#comment_cancel').on('click', function(e) {
+  		$('#add_comment').hide();
+  		$('#add_comment_btn').show();
+  		$('#add_comment textarea').val("");
+  	});
+
+  	$('#comment_save').on('click', function(e) {
+  // 		var category_index = $(modal).attr('data-current-category');
+  // 		var card_index = $(modal).attr('data-current-card');
+
+		// var card = all_categories[category_index].cards[card_index];
+		// card.description = textarea.val();
+
+		// $('#add_comment').hide();
+  // 		$('#add_comment_btn').show();
+  // 		add_comment($('#add_comment textarea').val();)
+  // 		$('#add_comment textarea').val("");
+
+		// $.ajax({
+		// 	url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+		// 	type: "PATCH",
+		// 	data: card,
+		// })
+		// .fail(function(e) {
+		// 	console.log(e);
+		// });
+  	});
+
 
   	$('#add_label_btn').on('mouseenter', function(e) {
   		var labels_to_add = [];
