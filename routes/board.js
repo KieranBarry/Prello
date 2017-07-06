@@ -1,12 +1,12 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var authCheck = require('../authCheck');
+// var authCheck = require('../authCheck');
 var Board = require('../models/board_model');
 
 var router = express.Router();
 
 var board_id = ""
-router.get('/:bid', authCheck, function(req, res) {
+router.get('/:bid', function(req, res) {
 	board_id = req.params.bid;
 
 	Board.findById(board_id, function(err, board) {

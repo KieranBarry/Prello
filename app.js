@@ -4,22 +4,33 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 var cors = require('cors');
 var session = require('client-sessions');
+// var Sequelize = require('sequelize');
+var sequelize = require('./db.js'); //runs it at beginning
 var User = require('./models/user_model');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var board = require('./routes/board');
 
-mongoose.connect('mongodb://localhost/prello');
+// mongoose.connect('mongodb://localhost/prello');
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("connected to mongo!");
-});
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//   console.log("connected to mongo!");
+// });
+
+// var sequelize = new Sequelize('postgres://prello:prello@localhost:5432/prello');
+// sequelize.authenticate()
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err);
+//   });
 
 var app = express();
 
@@ -43,21 +54,21 @@ app.use(session({
   activeDuration: 5 * 60 * 1000,
 }));
 
-app.use(function(req, res, next) {
-  if (req.session && req.session.user) {
-    User.findOne({ email: req.session.user.email }, function(err, user) {
-      if (user) {
-        req.user = user;
-        delete req.user.password; // delete the password from the session
-        req.session.user = user;  //refresh the session value
-        res.locals.user = user;
-      }
-      next();
-    });
-  } else {
-    next();
-  }
-});
+// app.use(function(req, res, next) {
+//   if (req.session && req.session.user) {
+//     // User.findOne({ email: req.session.user.email }, function(err, user) {
+//     //   if (user) {
+//     //     req.user = user;
+//     //     delete req.user.password; // delete the password from the session
+//     //     req.session.user = user;  //refresh the session value
+//     //     res.locals.user = user;
+//     //   }
+//     //   next();
+//     // });
+//   } else {
+//     next();
+//   }
+// });
 
 app.use('/', index);
 app.use('/users', users);

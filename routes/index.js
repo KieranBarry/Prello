@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', authCheck, function(req, res, next) {
+router.get('/', function(req, res, next) {
 	Board.find(function(err, boards) {
 		if (err) {
 			console.log(err);
