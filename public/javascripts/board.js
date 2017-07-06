@@ -166,7 +166,7 @@ $(function() {
 	// }	
 
 	$.ajax({
-	    url: "http://localhost:3000/list",
+	    url: "http://localhost:3000/board/0/list",
 	    dataType : "json"
 	})
 	.done(function(json) {
@@ -242,7 +242,7 @@ $(function() {
 		e.stopPropagation();
 
 		$.ajax({
-			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
+			url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
@@ -272,7 +272,7 @@ $(function() {
 	    	description: ""
 	    };
   		$.ajax({
-		    url: `http://localhost:3000/list/${all_categories[category_index]._id}/card`,
+		    url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card`,
 		    type: "POST",
 		    dataType : "json",
 		    data: new_card
@@ -292,7 +292,7 @@ $(function() {
 		var to_delete = $(this).parent();
 
 		$.ajax({
-			url: `http://localhost:3000/list/${all_categories[to_delete.index()]._id}`,
+			url: `http://localhost:3000/board/0/list/${all_categories[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
@@ -314,7 +314,7 @@ $(function() {
   		$(this).parent().parent().parent().find('.add_content').show();
 
   		$.ajax({
-		    url: 'http://localhost:3000/list/',
+		    url: 'http://localhost:3000/board/0/list/',
 		    type: "POST",
 		    dataType : "json",
 		    data: new_category
@@ -389,7 +389,7 @@ $(function() {
 		card.description = textarea.val();
 
 		$.ajax({
-			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
 			data: card,
 		})
@@ -430,7 +430,7 @@ $(function() {
   		$('#add_comment textarea').val("");
 
 		$.ajax({
-			url: `http://localhost:3000/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
 			data: card,
 		})
@@ -498,7 +498,7 @@ $(function() {
   		$('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
 
   		$.ajax({
-			url: `http://localhost:3000/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
+			url: `http://localhost:3000/board/0/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
 			type: "PATCH",
 			data: card
 		})

@@ -1,59 +1,65 @@
 body {
-	font-family: Helvetica, sans-serif;
+	background-color: #eee;
 }
 
-h1 {
+h2 {
 	font-size: 24px;
-	margin: 50px 50px 0px 60px;
+	margin: 80px 50px 0px 60px;
 	color: #555;
 	font-weight: lighter;
+	text-align: left;
 }
 
-ul {
-	list-style-type: none;
-	margin: 20px 50px 0px 50px;
-	padding:0;
+#boards_list {
+	margin: 10px 50px 0px 50px;
 }
 
-li {
-	background-color: #3D59AB;
+.board_btn {
+	background-color: #6495ED;
 	width: 260px;
 	height: 110px;
 	display: inline-block;
 	margin: 10px 5px 5px 5px;
 	vertical-align: top;
 	padding: 20px;
+	border-radius: 10px;
+}
+
+.board_btn a {
 	font-size: 20px;
 	font-weight: bold;
 	color: white;
-	border-radius: 2px;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
 }
 
-li:hover {
-	background-color: #6495ED;
+.board_btn:hover {
+	background-color: #3D59AB;
 	cursor: pointer;
 }
 
-button {
+#add_btn {
 	text-align: center;
 	width: 150px;
-	background-color: #ccc;
+	background-color: #aaa;
 	height: 150px;
 	display: inline-block;
-	padding: 0px 30px 100px 30px;
 	margin: 10px 5px;
 	vertical-align: top;
 	border: 0;
-	border-radius: 2px;
+	border-radius: 10px;
 }
 
-button:hover {
-	background-color: #bbb;
+#add_btn:hover {
+	background-color: #777;
 	cursor: pointer;
 }
 
-a {
+#add_btn a {
 	font-size: 120px;
 	text-decoration: none;
 	color: white;
+	position: relative;
+	top: -10px;
 }

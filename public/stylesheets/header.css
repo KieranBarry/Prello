@@ -1,3 +1,11 @@
+body {
+  margin: 0;
+  font-family: Helvetica;
+  margin-top: 50px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
 ul {
   margin: 0;
   padding: 0;

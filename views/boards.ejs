@@ -1,0 +1,28 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<%- include header.ejs %>
+	<h2>Welcome! Select a board:</h2>
+	<ul id="boards_list">
+		<% for(var i=0; i<boards.length; i++) {%>
+		   <li class="board_btn"><a href="/board"><%= boards[i].title %></a></li>
+		<% } %>
+		<button id="add_btn">
+			<a href="#">+</a>
+		</button>
+	</ul>
+<%- include footer.ejs %>
+ -->
+
+
+<%- include header.ejs %>
+	<h2>Welcome! Select a board:</h2>
+	<ul id="boards_list">
+		<% for(var i=0; i<boards.length; i++) {%>
+		   <li class="board_btn"><a href="/board/<%=boards[i].id%>"><%= boards[i].title %></a></li>
+		<% } %>
+		<button id="add_btn">
+			<a href="#">+</a>
+		</button>
+	</ul>
+<%- include footer.ejs %>

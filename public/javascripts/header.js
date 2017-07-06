@@ -19,17 +19,16 @@ $(function(){
 		}
 	});
 
-	$('#logout_button').click(function(e) {
-		$.ajax({
-			url: 'http://localhost:3000/logout'
-		})
-		.done(function() {
-			console.log("logged out");
-			window.location.href = '/';
-		})
-		.fail(function(e) {
-			console.log(e);
-		});
-	})
+	// $('#logout_button').click(function(e) {
+	// 	$.ajax({
+	// 		url: 'http://localhost:3000/logout'
+	// 	})
+	// 	.done(function() {
+	// 		console.log("logged out");
+	// 	})
+	// 	.fail(function(e) {
+	// 		console.log(e);
+	// 	});
+	// })
 });
 

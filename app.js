@@ -11,7 +11,7 @@ var User = require('./models/user_model');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var list = require('./routes/list');
+var board = require('./routes/board');
 
 mongoose.connect('mongodb://localhost/prello');
 
@@ -61,7 +61,7 @@ app.use(function(req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/list', list);
+app.use('/board', board);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
