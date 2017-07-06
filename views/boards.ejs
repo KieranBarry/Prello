@@ -18,9 +18,9 @@
 <%- include header.ejs %>
 	<h2>Welcome! Select a board:</h2>
 	<ul id="boards_list">
-		<% for(var i=0; i<boards.length; i++) {%>
-		   <li class="board_btn"><a href="/board/<%=boards[i].id%>"><%= boards[i].title %></a></li>
-		<% } %>
+		<% boards.forEach(function(b) { %>
+		   <%- `<li class="board_btn"><a href="/board/${b.id}">${b.title}</a></li>` %>
+		<% }); %>
 		<button id="add_btn">
 			<a href="#">+</a>
 		</button>
