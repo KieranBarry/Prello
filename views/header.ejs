@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="username" content='<%= email %>'>
 		<title><%= title %></title>
 		<link rel="stylesheet" href=<%= stylesheet %>>
 		<link rel="stylesheet" href="/stylesheets/header.css">
@@ -11,29 +10,35 @@
 		<script src=<%= javascript %>></script>
 	</head>
 	<body>
+		<% var user_email = email; %>
 		<nav>
-			<button class="dropdown_button">
-				<p>Boards <span class="down_arrow" id="down_arrow">&#9660</span></p>
-			</button>
+			<% if(boards.length > 0) { %>
+				<button class="dropdown_button">
+					<p>Boards <span class="down_arrow" id="down_arrow">&#9660</span></p>
+				</button>
+			<% } %>
 			<h1>Prello</h1>
-			<button id="options_button">
-				<p><span class="left_arrow">&#9664</span> Options</p>
-			</button>
+			<% if(showOptions) { %>
+				<button id="options_button">
+					<p><span class="left_arrow">&#9664</span> Options</p>
+				</button>
+			<% } %>
 		</nav>
 
-		<div id="side_menu">
-			<a href="#" class="close_button">&times;</a>
-			<a href="/logout" id="logout_button">Logout</a>
-		</div>
+		<% if(showOptions) { %>
+			<div id="side_menu">
+				<a class="close_button">&times;</a>
+				<a href="/logout" id="logout_button">Logout</a>
+			</div>
+		<% } %>
 
-		<div id="drop_down">
-			<ul>
-				<li>Board Name</li>
-				<li>Board Name</li>
-				<li>Board Name</li>
-				<li>Board Name</li>
-				<li>Board Name</li>
-				<li>Board Name</li>
-				<li>Board Name</li>
-			</ul>
-		</div>
+		<% if(boards.length > 0) { %>
+			<div id="drop_down">
+				<ul id="drop_ul">
+					<% boards.forEach(function(board) { %>
+						<%- `<li class="board_li"><a href="/board/${board._id}">${board.title}</a></li/>` %>
+					<% }); %>
+					<li id="all_boards_btn" class="board_li"><a href="/">See All</a></li>
+				</ul>
+			</div>
+		<% } %>

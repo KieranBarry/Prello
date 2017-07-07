@@ -177,8 +177,7 @@ $(function() {
 		alert("You're latest Ajax request failed.");
 	});
 
-
-	lol = $('#lol');
+	lol = $("#lol");
 
 	/* //////     /////////   EVENT HANDLING    /////////    ////// */
 
@@ -266,7 +265,7 @@ $(function() {
 
 		var new_card = {
 	    	title,
-	    	creator: $('meta[name="username"]').attr('content'),
+	    	creator: user_email,
 	    	description: ""
 	    };
   		$.ajax({
@@ -416,7 +415,7 @@ $(function() {
 		var card = all_categories[category_index].cards[card_index];
 		var new_comment = {
 			text: $('#add_comment textarea').val(),
-			username: $('meta[name="username"]').attr('content'),
+			username: user_email,
 			date: new Date()
 		}
 

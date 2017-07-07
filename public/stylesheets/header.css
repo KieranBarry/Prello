@@ -109,6 +109,7 @@ p {
 
 #side_menu a:hover{
   color: #6495ED;
+  cursor: pointer;
 }
 
 #side_menu .close_button {
@@ -138,7 +139,7 @@ p {
   border-radius: 4px;
 }
 
-#drop_down li {
+.board_li {
   height: 15px;
   width: 206px;
   margin: 7px;
@@ -148,9 +149,29 @@ p {
   padding: 10px 15px;
   font-size: 14px;
   font-weight: bold;
+  overflow: hidden;
 }
 
-#drop_down li:hover {
+.board_li:hover {
   cursor: pointer;
   background-color: #6495ED;
+}
+
+#all_boards_btn {
+  text-align: center;
+  background-color: #999;
+}
+
+#all_boards_btn:hover {
+  background-color: #bbb;
+}
+
+#drop_down a {
+  color:white;
+  text-decoration: none;
+  width: 206px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

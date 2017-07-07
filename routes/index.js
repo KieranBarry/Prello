@@ -7,16 +7,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', authCheck, function(req, res, next) {
+	res.render('boards', { title: 'Prello Boards', stylesheet: 'stylesheets/boards.css', javascript: 'javascripts/boards.js', email: req.session.user.email, showOptions: true, boards: [] });
+});
+
+router.get('/boards', authCheck, function(req, res, next) {
 	Board.find(function(err, boards) {
 		if (err) {
 			console.log(err);
 		} else {
-			all_boards = boards;
-			res.render('boards', { title: 'Prello Boards', stylesheet: 'stylesheets/boards.css', javascript: 'javascripts/boards.js', email: req.session.user.email, boards });
+			res.json(boards);
 		}
 	});
-
-	// res.render('boards', { title: 'Prello Boards', stylesheet: 'stylesheets/boards.css', javascript: 'javascripts/boards.js', email: req.session.user.email })
 });
 
 router.post('/boards', function(req, res, next) {

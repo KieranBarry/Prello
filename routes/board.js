@@ -9,13 +9,30 @@ var board_id = ""
 router.get('/:bid', authCheck, function(req, res) {
 	board_id = req.params.bid;
 
-	Board.findById(board_id, function(err, board) {
+	Board.find(function(err, boards) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render('board', { title: board.title, stylesheet: '../stylesheets/board.css', javascript: '../javascripts/board.js', email: req.session.user.email });
+			var board_title = "uh oh";
+			var boards_to_add = [];
+			boards.forEach(function(board) {
+				if (board._id == board_id) {
+					console.log("found it");
+					board_title = board.title;
+				} else {
+					boards_to_add.push(board);
+				}
+			})
+			res.render('board', { title: board_title, stylesheet: '../stylesheets/board.css', javascript: '../javascripts/board.js', email: req.session.user.email, showOptions: true, boards:boards_to_add });
 		}
-	});
+	})
+	// Board.findById(board_id, function(err, board) {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		res.render('board', { title: board.title, stylesheet: '../stylesheets/board.css', javascript: '../javascripts/board.js', email: req.session.user.email, showOptions: true, boards: [] });
+	// 	}
+	// });
 });
 
 router.get('/:bid/list', function(req, res) {
@@ -26,13 +43,6 @@ router.get('/:bid/list', function(req, res) {
 			res.json(board.lists);
 		}
 	})
-	// List.find(function(err, lists) {
-	// 	if(err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		res.json(lists);
-	// 	}
-	// });
 });
 
 router.post('/:bid/list', function(req, res) {
@@ -50,18 +60,6 @@ router.post('/:bid/list', function(req, res) {
 			})
 		}
 	})
-
-	// var newList = new List(
-	// 	{title: req.body.title}
-	// );
-
-	// newList.save(function (err, list) {
-	// 	if (err) {
-	//     	console.log(err);
-	//   	} else {
-	// 	    res.json(list);
-	// 	}
-	// });
 });
 
 router.delete('/:bid/list/:lid', function(req, res) {
@@ -79,13 +77,6 @@ router.delete('/:bid/list/:lid', function(req, res) {
 			});
 		}
 	});
-	// List.findByIdAndRemove(req.params.lid, function(err) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		res.send('complete');
-	// 	}
-	// });
 });
 
 router.patch('/:bid/list/:lid', function(req, res) {
@@ -106,23 +97,6 @@ router.patch('/:bid/list/:lid', function(req, res) {
 			});
 		}
 	});
-
-	// List.findById(req.params.lid, function(err, list) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		list.title = req.body.title || list.title;
-	// 		list.cards = req.body.cards || list.cards;
-
-	// 		list.save(function(err, list) {
-	// 			if (err) {
-	// 				console.log(err);
-	// 			} else {
-	// 				res.json(list);
-	// 			}
-	// 		})
-	// 	}
-	// })
 });
 
 router.post('/:bid/list/:lid/card', function(req, res) {
@@ -141,20 +115,6 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 			})
 		}
 	});
-	// List.findById(req.params.lid, function(err, list) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		list.cards.push(req.body);
-	// 		list.save(function(err, list) {
-	// 			if (err) {
-	// 				console.log(err);
-	// 			} else {
-	// 				res.json(list);
-	// 			}
-	// 		});
-	// 	}
-	// });
 });
 
 router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
@@ -173,21 +133,6 @@ router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
 			})
 		}
 	});
-
-	// List.findById(req.params.lid, function(err, list) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		list.cards.pull(req.params.cid);
-	// 		list.save(function(err, list) {
-	// 			if (err) {
-	// 				console.log(err);
-	// 			} else {
-	// 				res.json(list);
-	// 			}
-	// 		});
-	// 	}
-	// });
 });
 
 router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
@@ -210,26 +155,6 @@ router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
 			})
 		}
 	});
-
-	// List.findById(req.params.lid, function(err, list) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		var card = list.cards.id(req.params.cid)
-	// 		card.title = req.body.title || card.title;
-	// 		card.description = req.body.description || card.description;
-	// 		card.labels = req.body.labels || card.labels;
-	// 		card.comments = req.body.comments || card.comments;
-
-	// 		list.save(function(err, list) {
-	// 			if (err) {
-	// 				console.log(err);
-	// 			} else {
-	// 				res.json(list);
-	// 			}
-	// 		});
-	// 	}
-	// });
 });
 
 

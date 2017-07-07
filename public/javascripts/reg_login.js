@@ -1,9 +1,9 @@
 $(function() {
 	if ($('#email_error').text() !== "") {
 		$('#login').hide();
+		$('#register').show();
 		$('#reg_email').focus();
 	} else {
-		$('#register').hide();
 		if ($('#login_error').text() !== "") {
 			$('#login_form input').css('borderColor', 'red');
 			$('#login_email').focus();

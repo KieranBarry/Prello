@@ -1,26 +1,6 @@
-<!-- <!DOCTYPE html>
-<html>
-
 <%- include header.ejs %>
 	<h2>Welcome! Select a board:</h2>
 	<ul id="boards_list">
-		<% for(var i=0; i<boards.length; i++) {%>
-		   <li class="board_btn"><a href="/board"><%= boards[i].title %></a></li>
-		<% } %>
-		<button id="add_btn">
-			<a href="#">+</a>
-		</button>
-	</ul>
-<%- include footer.ejs %>
- -->
-
-
-<%- include header.ejs %>
-	<h2>Welcome! Select a board:</h2>
-	<ul id="boards_list">
-		<% boards.forEach(function(b) { %>
-		   <%- `<li class="board_btn"><a class="delete_btn">x</a><a class="board_title" href="/board/${b.id}">${b.title}</a></li>` %>
-		<% }); %>
 		<div id="add_btn" class="add_btn hover">
 			<a id="plus">+</a>
 			<div id="board_form" class="new_content" style="display: none;">

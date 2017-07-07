@@ -8,6 +8,23 @@ function closeBoardForm() {
 
 $(function() {
 	// $('#board_form').hide();
+	// <% boards.forEach(function(b) { %>
+	// 	   <%- `<li class="board_btn"><a class="delete_btn">x</a><a class="board_title" href="/board/${b.id}">${b.title}</a></li>` %>
+	// 	<% }); %>
+	$.ajax({
+		url: 'http://localhost:3000/boards',
+		dataType: "json",
+	}).done(function(json) {
+		json.forEach(function(b) {
+			var li = $('<li class="board_btn"/>');
+			var x = $('<a class="delete_btn">x</a>');
+			var a = $(`<a class="board_title" href="/board/${b._id}">${b.title}</a>`);
+			li.append(x).append(a);
+			$('#add_btn').before(li);
+		})
+	}).fail(function(err) {
+		console.log(err);
+	});
 
 	$('#boards_list').on('click', '.board_btn', function(e) {
 		$(this).children()[1].click();

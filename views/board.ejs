@@ -3,7 +3,7 @@
 	<div id="lol_container">
 		<ul id="lol">
 			<li id="add_category_li">
-				<a href="#" class="add_content">Add new category...</a>
+				<a class="add_content">Add new category...</a>
 				<div class="new_content" style="display: none;">
 					<input type="text" id="category_title_input" class="title_input" placeholder="Enter Category Name">
 					<button id="category_add_button" class="add_category_button">Add</button>
@@ -17,7 +17,7 @@
 	<div id="modal" data-current-category="1" data-current-card="1">
 		<div id="modal_bg"></div>
 		<div id="card">
-			<a href="#" id="close_card" class="close_button">&times;</a>
+			<a id="close_card" class="close_button">&times;</a>
 			<p class="subtitle" id="created_by">created by <span id="creator"></span></p>
 			<h3 id="card_title">Card Name</h3>
 			<p class="subtitle">in <span id="category_name">Category Name</span></p>
@@ -28,20 +28,20 @@
 				</li>
 			</ul>
 			<p class="subtitle">Description</p>
-			<a href="#" class="edit_button" id="description_edit_btn">Edit</a>
+			<a class="edit_button" id="description_edit_btn">Edit</a>
 			<p id="text_description" class="card_text">This is the description. It is very informative. It tells you everything there is to konw about whatever it is that this card is about (see card title above). Wow. So useful.</p>
 			<div id="editable_description">
 				<textarea placeholder="Write a description..." id="edit_description_text"></textarea>
 				<button id="description_save" class="save_button">Save</button>
-				<a href="#" class="cancel_button" id="description_cancel">Cancel</a>
+				<a class="cancel_button" id="description_cancel">Cancel</a>
 			</div>
 			<h4>Comments</h4>
 			<ul id="comment_list"></ul>
-			<a href="#" class="edit_button" id="add_comment_btn">Add comment...</a>
+			<a class="edit_button" id="add_comment_btn">Add comment...</a>
 			<div id="add_comment">
 				<textarea placeholder="Write a comment..."></textarea>
 				<button class="save_button" id="comment_save">Save</button>
-				<a href="#" class="cancel_button" id="comment_cancel">Cancel</a>
+				<a class="cancel_button" id="comment_cancel">Cancel</a>
 			</div>
 		</div>
 	</div>
