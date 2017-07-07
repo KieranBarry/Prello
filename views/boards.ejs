@@ -19,10 +19,15 @@
 	<h2>Welcome! Select a board:</h2>
 	<ul id="boards_list">
 		<% boards.forEach(function(b) { %>
-		   <%- `<li class="board_btn"><a href="/board/${b.id}">${b.title}</a></li>` %>
+		   <%- `<li class="board_btn"><a class="delete_btn">x</a><a class="board_title" href="/board/${b.id}">${b.title}</a></li>` %>
 		<% }); %>
-		<button id="add_btn">
-			<a href="#">+</a>
-		</button>
+		<div id="add_btn" class="add_btn hover">
+			<a id="plus">+</a>
+			<div id="board_form" class="new_content" style="display: none;">
+				<input type="text" id="board_name" value="Board Name">
+				<button id="add_board_button">Add</button>
+				<a id="cancel_button">Cancel</a>
+			</div>
+		</div>
 	</ul>
 <%- include footer.ejs %>

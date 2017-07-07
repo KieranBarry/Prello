@@ -31,14 +31,17 @@ router.post('/boards', function(req, res, next) {
 			res.json(board);
 		}
 	});
-})
+});
 
-// router.get('/board', authCheck, function(req, res, next) {
-// 	console.log("hello");
-// 	// res.send("done");
-//   	res.render('board', { title: 'Prello Board', stylesheet: 'stylesheets/board.css', javascript: 'javascripts/board.js', email: req.session.user.email });
-
-// });
+router.delete('/boards/:bid', function(req, res, next) {
+	Board.findByIdAndRemove(req.params.bid, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send('complete');
+		}
+	});
+});
 
 router.get('/logout', function(req, res) {
   req.session.reset();

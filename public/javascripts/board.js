@@ -75,13 +75,11 @@ function addCategory(category, index) {
 	var add_card_button = $('<a class="add_content">Add new card...</a>');
 	
 	var new_card_div = $('<div class="new_content" style="display: none;"/>');
-	var form = $('<form/>');
 	var title_input = $('<input type="text" class="title_input" placeholder="Enter card title..." required/>');
 	var submit_button = $('<button class="add_card_button">Add</button>');
 	var cancel_button = $('<a class="cancel_new_button">Cancel</a>');
-	form.append(title_input).append(submit_button);
 	
-	new_card_div.append(form).append(cancel_button);
+	new_card_div.append(title_input).append(submit_button).append(cancel_button);
 	category_li.append(delete_button).append(title).append(card_list).append(add_card_button).append(new_card_div);
 
 	$('#add_category_li').before(category_li);
@@ -257,13 +255,13 @@ $(function() {
 
 	// add card
   	lol.on('click', '.add_card_button', function(e) {
-  		var category_index = $(this).parent().parent().parent().index();
+  		var category_index = $(this).parent().parent().index();
   		var title = $(this).parent().find('input')[0].value;
-  		var card_list = $(this).parent().parent().parent().find('.card_list');
+  		var card_list = $(this).parent().parent().find('.card_list');
 
-  		$(this).parent().parent().hide();
-  		$(this).parent().parent().find('input').val("");
-  		$(this).parent().parent().parent().find('.add_content').show();
+  		$(this).parent().hide();
+  		$(this).parent().find('input').val("");
+  		$(this).parent().parent().find('.add_content').show();
 
 
 		var new_card = {
@@ -309,9 +307,9 @@ $(function() {
   	lol.on('click', '.add_category_button', function(e) {
   		var new_category = new Category($(this).parent().find('input')[0].value, []); //mind find trouble with this empty array
 
-  		$(this).parent().parent().hide();
-  		$(this).parent().parent().find('input').val("");
-  		$(this).parent().parent().parent().find('.add_content').show();
+  		$(this).parent().hide();
+  		$(this).parent().find('input').val("");
+  		$(this).parent().parent().find('.add_content').show();
 
   		$.ajax({
 		    url: 'http://localhost:3000/board/0/list/',
