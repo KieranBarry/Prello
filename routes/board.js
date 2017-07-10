@@ -1,12 +1,14 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var authCheck = require('../authCheck');
+var permissionCheck = require("../permissionCheck");
 var Board = require('../models/board_model');
+var User = require('../models/user_model');
 
 var router = express.Router();
 
 var board_id = ""
-router.get('/:bid', authCheck, function(req, res) {
+router.get('/:bid', authCheck, permissionCheck, function(req, res) {
 	board_id = req.params.bid;
 
 	Board.find(function(err, boards) {
@@ -17,7 +19,6 @@ router.get('/:bid', authCheck, function(req, res) {
 			var boards_to_add = [];
 			boards.forEach(function(board) {
 				if (board._id == board_id) {
-					console.log("found it");
 					board_title = board.title;
 				} else {
 					boards_to_add.push(board);
@@ -25,7 +26,7 @@ router.get('/:bid', authCheck, function(req, res) {
 			})
 			res.render('board', { title: board_title, stylesheet: '../stylesheets/board.css', javascript: '../javascripts/board.js', email: req.session.user.email, showOptions: true, boards:boards_to_add });
 		}
-	})
+	});
 	// Board.findById(board_id, function(err, board) {
 	// 	if (err) {
 	// 		console.log(err);
@@ -35,14 +36,43 @@ router.get('/:bid', authCheck, function(req, res) {
 	// });
 });
 
-router.get('/:bid/list', function(req, res) {
+router.get('/:bid/content', function(req, res) {
 	Board.findById(board_id, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.json(board.lists);
+			res.json(board);
 		}
 	})
+});
+
+router.post('/:bid/user', function(req, res) {
+	User.findOne({email: req.body.email}, function(err, user) {
+		if (err) {
+			console.log(err);
+		} else {
+			if (!user) {
+				res.send("User does not exist");
+			}
+			var userObj = {_id: user._id, email: user.email}; 
+			console.log(userObj);
+			Board.findById(board_id, function(err, board) {
+				if (err) {
+					console.log(err);
+				} else {
+					board.users.push(userObj);
+					board.save(function(err, board) {
+						if(err) {
+							console.log(err);
+						} else {
+							res.send("complete");
+						}
+					})
+				}
+			});
+		}
+	});
+	
 });
 
 router.post('/:bid/list', function(req, res) {
@@ -110,6 +140,7 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 				if (err) {
 					console.log(err);
 				} else {
+					io.emit("newCard", { for: 'everyone', card: req.body})
 					res.json(board.lists.id(req.params.lid));
 				}
 			})

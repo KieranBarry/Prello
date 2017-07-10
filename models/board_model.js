@@ -24,9 +24,14 @@ var listSchema = mongoose.Schema({
 	cards: [cardSchema]
 });
 
+var userSchema = mongoose.Schema({
+	email: String,
+	_id: String
+});
 
 var boardSchema = mongoose.Schema({
 	title: String,
+	users: [userSchema],
 	lists: [listSchema]
 });
 

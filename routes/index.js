@@ -1,5 +1,6 @@
 var express = require('express');
 var authCheck = require('../authCheck');
+var permissionCheck = require('../permissionCheck');
 var Board = require('../models/board_model');
 var mongoose = require('mongoose');
 
@@ -11,7 +12,7 @@ router.get('/', authCheck, function(req, res, next) {
 });
 
 router.get('/boards', authCheck, function(req, res, next) {
-	Board.find(function(err, boards) {
+	Board.find({users: {$elemMatch: {_id: req.user._id}}},function(err, boards) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -20,9 +21,12 @@ router.get('/boards', authCheck, function(req, res, next) {
 	});
 });
 
-router.post('/boards', function(req, res, next) {
+router.post('/boards', authCheck, function(req, res, next) {
+	var userInfo = {_id: req.user._id, email: req.user.email};
+
 	var newBoard = new Board({
-		title: req.body.title
+		title: req.body.title,
+		users: [userInfo]
 	});
 
 	newBoard.save(function(err, board) {
@@ -34,7 +38,7 @@ router.post('/boards', function(req, res, next) {
 	});
 });
 
-router.delete('/boards/:bid', function(req, res, next) {
+router.delete('/boards/:bid', authCheck, permissionCheck, function(req, res, next) {
 	Board.findByIdAndRemove(req.params.bid, function(err) {
 		if (err) {
 			console.log(err);

@@ -94,7 +94,7 @@ p {
   padding-top: 60px;
 }
 
-#side_menu a {
+.option {
   margin: 10px 10px 10px 30px;
   text-decoration: none;
   font-size: 25px;
@@ -121,6 +121,10 @@ p {
   top: 0;
   font-size: 36px;
   margin: 0;
+}
+
+#logout_button {
+  clear: both;
 }
 
 

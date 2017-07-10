@@ -328,7 +328,7 @@ li {
   outline:0;
 }
 
-.add_card_button, .add_category_button {
+.add_button {
   float: left;
   width: 52px;
   border: 0;
@@ -341,7 +341,7 @@ li {
   font-weight: lighter;
 }
 
-.add_card_button:hover, .add_category_button:hover {
+.add_button:hover {
   cursor: pointer;
   background-color: #6495ED;
 }
@@ -383,4 +383,83 @@ li {
 .card_comment .card_text {
   margin: 20px 0px 0px 0px;
 }
+
+#users_div {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0px 30px;
+  width: 170px;
+}
+
+h5 {
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+  margin: 0px 0px 5px 0px;
+  color: #444;
+}
+
+.user_li {
+  font-size: 14px;
+  color: #444;
+  margin: 5px 0px;
+}
+
+#add_user_btn {
+  font-size: 14px;
+  color: #444;
+  border-top: 1px solid #444;
+  width: 100%;
+  padding-top: 5px;
+  display: block;
+}
+
+#add_user_input {
+  width: 170px;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+  color: #444;
+  font-size: 14px;
+  font-weight: normal;
+  border: 0;
+  border-radius: 0px;
+  border-top: 1px solid #444;
+  padding-top: 5px;
+  display: block;
+  outline: none;
+}
+
+#user_add_button {
+  width: 45px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 12px;
+  margin: 7px 0px 0px 0px;
+  padding: 3px;
+  background-color: #3D59AB;
+  color: white;
+}
+
+#user_add_button:hover {
+  cursor: pointer;
+  background-color: #6495ED;
+}
+
+#user_cancel_button {
+  color: #444;
+  font-size: 12px;
+  float: right;
+  margin: 10px 5px;
+  text-decoration: underline;
+}
+
+#user_cancel_button:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
 

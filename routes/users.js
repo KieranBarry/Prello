@@ -49,11 +49,8 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login', function(req, res) {
 	console.log('login request sent');
-	console.log(req.body.email);
-	console.log(req.body.password);
   	User.findOne({ email: req.body.email }, function(err, user) {
     	if (!user) {
-    		console.log("user not found");
       		res.render('reg_login', { title: 'Prello Login', stylesheet: '/stylesheets/reg_login.css', javascript: '/javascripts/reg_login.js', login_error: "Invalid email or password", register_error: "", email: "", showOptions: false, boards: [] });
     	} else {
       		if (req.body.password === user.password) {

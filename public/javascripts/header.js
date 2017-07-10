@@ -23,5 +23,21 @@ $(function(){
 	$('body').on('click', '.board_li', function(e) {
 		$(this).children()[0].click();
 	})
+
+	// for() {
+	// 	$('#users')
+	// }
+
+
+	// $('#add_user_btn').click(function(e) {
+	// 	// $(this).hide();
+	// 	$('#add_user').show();
+	// });
+
+	// $('#user_cancel_button').click(function(e) {
+	// 	$(this).parent().hide();
+	// 	// $('#add_user_btn').show();
+	// 	$('#add_user_input').val("");
+	// })
 });
 

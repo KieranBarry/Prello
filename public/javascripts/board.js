@@ -76,7 +76,7 @@ function addCategory(category, index) {
 	
 	var new_card_div = $('<div class="new_content" style="display: none;"/>');
 	var title_input = $('<input type="text" class="title_input" placeholder="Enter card title..." required/>');
-	var submit_button = $('<button class="add_card_button">Add</button>');
+	var submit_button = $('<button class="add_card_button add_button">Add</button>');
 	var cancel_button = $('<a class="cancel_new_button">Cancel</a>');
 	
 	new_card_div.append(title_input).append(submit_button).append(cancel_button);
@@ -163,18 +163,37 @@ $(function() {
 	// 	});	
 	// }	
 
+	// var users_btn = $('<a id="users_btn" class="option">Users</a>');
+	var users_div = $('<div id="users_div"/>');
+	var users_title = $('<h5>Users</h5>');
+	var users_ul = $('<ul id="users_ul"/>');
+	var add_user_btn = $('<a id="add_user_btn">Add a user...</a>');
+
+	var new_user_div = $('<div id="add_user" class="add_user" style="display:none;"/>');
+	var user_input = $('<input type="text" id="add_user_input" placeholder="Enter User Email"/>');
+	var user_add_btn = $('<button id="user_add_button">Add</button>');
+	var user_cancel_btn = $('<a id="user_cancel_button">Cancel</a>');
+
+	new_user_div.append(user_input).append(user_add_btn).append(user_cancel_btn);
+	users_div.append(users_title).append(users_ul).append(add_user_btn).append(new_user_div);
+	$('#logout_button').before(users_div);
+
 	$.ajax({
-	    url: "http://localhost:3000/board/0/list",
+	    url: "http://localhost:3000/board/0/content",
 	    dataType : "json"
 	})
 	.done(function(json) {
-		for (var i in json) {
-			addCategory(json[i]);
-			all_categories.push(json[i]);
-		}
+		json.lists.forEach(function(l) {
+			addCategory(l);
+			all_categories.push(l);
+		})
+		json.users.forEach(function(u) {
+			var li = $(`<li class="user_li">${u.email}</li>`);
+			users_ul.append(li);
+		});
 	})
-	.fail(function() {
-		alert("You're latest Ajax request failed.");
+	.fail(function(err) {
+		console.log(err);
 	});
 
 	lol = $("#lol");
@@ -505,6 +524,41 @@ $(function() {
   	});
 
  //  	// Side Menu Control
+
+ 	$('#add_user_btn').click(function(e){
+ 		$(this).hide();
+ 		$("#add_user").show();
+ 		$("#add_user_input").focus();
+ 	});
+
+ 	$('#user_cancel_button').click(function(e) {
+ 		$(this).parent().hide();
+ 		$("#add_user_input").val("");
+ 		$("#add_user_btn").show();
+ 	});
+
+ 	$("#user_add_button").click(function(e) {
+ 		var user = {email: $("#add_user_input").val()};
+
+ 		$(this).parent().hide();
+ 		$("#add_user_input").val("");
+ 		$("#add_user_btn").show();
+
+ 		$.ajax({
+ 			url: 'http://localhost:3000/board/0/user',
+ 			type: "POST",
+ 			data: user
+ 		}).done(function(res) {
+ 			console.log(res);
+ 			if (res === "complete") {
+ 				var li = $(`<li class="user_li">${user.email}</li>`);
+				$('#users_ul').append(li);
+ 			}
+ 		}).fail(function(err) {
+ 			console.log(err);
+ 		})
+ 	});
+
  //  	$('#options_button').on('click', function(e) {
 	// 	$('#side_menu').width(250);
 	// });
