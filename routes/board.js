@@ -151,9 +151,10 @@ router.post('/:bid/list/:lid/card', authCheck, permissionCheck, function(req, re
 				if (err) {
 					console.log(err);
 				} else {
-					var list = board.lists.id(req.params.lid);
-					socketio.getInstance().in(req.params.bid).emit('newCard', {list_i, card: list.cards[list.cards.length-1]});
-					res.json(list);
+					var list = board.lists.id(req.params.lid)
+					var card = list.cards[list.cards.length-1];
+					socketio.getInstance().in(req.params.bid).emit('newCard', {list_i, card});
+					res.json(card);
 				}
 			})
 		}

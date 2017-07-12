@@ -66,6 +66,7 @@ var all_labels = [l0, l1, l2, l3, l4];
 /* //////     /////////   HELPER METHODS    /////////    ////// */
 
 function addCategory(category, index) {
+	all_categories.push(category);
 	var lol = $('#lol');
 	var category_li = $('<li class="category_li"/>');
 
@@ -86,12 +87,22 @@ function addCategory(category, index) {
 
 	if(category.cards.length > 0) {
 		for (var i in category.cards) {
-			card_list.append(makeCardButton(category.cards[i]));
+			card_list.append(makeCardDom(category.cards[i]));
 		}
 	}
 }
 
-function makeCardButton(card) {
+function deleteCategory(index) {
+	all_categories.splice(index, 1);
+	$('#lol').children().eq(index).remove();
+}
+
+function addCard(card, category_index) {
+	all_categories[category_index].cards.push(card);
+	$('#lol').children().eq(category_index).find('.card_list').append(makeCardDom(card)[0]);
+}
+
+function makeCardDom(card) {
 	var card_button_li = $("<li class='card_button'/>");
 	var delete_button = $("<a class='delete_card'>x</a>");
 	var label_list = $("<ul class='features'/>");
@@ -111,6 +122,10 @@ function makeCardButton(card) {
 	return card_button_li;
 }
 
+function deleteCard(category_index, card_index) {
+	all_categories[category_index].cards.splice(card_index, 1);
+	$('#lol').children().eq(category_index).find('.card_list').children().eq(card_index).remove();
+}
 
 function addComment(comment) {
 	var li = $('<li class="card_comment"/>');
@@ -119,6 +134,52 @@ function addComment(comment) {
 	var text = $(`<p class="card_text">${comment.text}</p>`);
 	li.append(user).append(date).append(text);
 	$('#comment_list').append(li);
+}
+
+function hideAddContent(domObj) {
+	domObj.parent().hide();
+	domObj.parent().find('input').val("");
+	domObj.parent().parent().find('.add_content').show();
+}
+
+function showAddContent(domObj) {
+	domObj.parent().find('.new_content').show();
+	domObj.parent().find('input').focus();
+	domObj.hide();
+}
+
+function hideEditDescription() {
+	$('#editable_description').hide();
+	$('#text_description').show();
+	$('#description_edit_btn').show();
+}
+
+function showEditDescription() {
+  	$('#editable_description').show();
+	$('#text_description').hide();
+	$('#description_edit_btn').hide();
+
+	var text_desc = $('#text_description');
+  	var textarea = $('#editable_description textarea');
+	textarea.val(text_desc.text());
+	if (text_desc.height() < 30) {
+		textarea.height(30);
+	} else {
+		textarea.height(text_desc.height()-5);
+	}
+	textarea.focus();
+}
+
+function showAddComment() {
+	$('#add_comment').show();
+	$('#add_comment_btn').hide();
+	$('#add_comment textarea').focus();
+}
+
+function hideAddComment() {
+	$('#add_comment').hide();
+	$('#add_comment_btn').show();
+	$('#add_comment textarea').val("");
 }
 
 var all_categories = [];
@@ -175,21 +236,16 @@ $(function() {
 		socket.emit('room', bid);
 	})
 	.on('newCategory', function(res) {
-		all_categories.push(res.category);
 		addCategory(res.category, all_categories.length);
     })
     .on('deleteCategory', function(res) {
-    	all_categories.splice(res.list_i, 1);
-		lol.children().eq(res.list_i).remove();
+    	deleteCategory(res.list_i);
     })
 	.on('newCard', function(res){
-    	all_categories[res.list_i].cards.push(res.card);
-		lol.children().eq(res.list_i).find('.card_list').append(makeCardButton(res.card)[0]);
+		addCard(res.card, res.list_i)
     })
     .on('deleteCard', function(res) {
-    	console.log(`list index: ${res.list_i}, card index: ${res.card_i}`);
-    	all_categories[res.list_i].cards.splice(res.card_i, 1);
-		lol.children().eq(res.list_i).find('.card_list').children().eq(res.card_i).remove();
+    	deleteCard(res.list_i, res.card_i);
     })
     .on('patchCard', function(res) {
     	all_categories[res.list_i].cards[res.card_i] = res.card;
@@ -233,7 +289,6 @@ $(function() {
 	.done(function(json) {
 		json.lists.forEach(function(l) {
 			addCategory(l);
-			all_categories.push(l);
 		})
 		json.users.forEach(function(u) {
 			var li = $(`<li class="user_li">${u.email}</li>`);
@@ -246,6 +301,95 @@ $(function() {
 
 ///////////////////////////////// EVENT HANDLING /////////////////////////////////
 
+	// ADD A CATEGORY
+  	lol.on('click', '.add_category_button', function(e) {
+  		var new_category = new Category($(this).parent().find('input')[0].value, []);
+  		hideAddContent($(this));
+
+  		$.ajax({
+		    url: `http://localhost:3000/board/${bid}/list/`,
+		    type: "POST",
+		    dataType : "json",
+		    data: new_category
+		})
+		.done(function(json) {
+			// addCategory(json, all_categories.length);
+		})
+		.fail(function(e) {
+			console.log(e);
+		});
+  	});
+
+	// DELETE A CATEGORY
+  	lol.on('click', '.delete_category', function(e) {
+		var index = $(this).parent().index();
+		$.ajax({
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[index]._id}`,
+			type: "DELETE",
+
+		})
+		.done(function() {
+			// deleteCategory(index);
+		})
+		.fail(function(e) {
+			console.log(e);
+		});
+  	});
+
+	// ADD A CARD
+  	lol.on('click', '.add_card_button', function(e) {
+  		var category_index = $(this).parent().parent().index();
+  		
+		var new_card = {
+	    	title: $(this).parent().find('input')[0].value,
+	    	creator: user_email,
+	    	description: ""
+	    };
+
+	    hideAddContent($(this));
+  		$.ajax({
+		    url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card`,
+		    type: "POST",
+		    dataType : "json",
+		    data: new_card
+		})
+		.done(function(json) {
+			// addCard(json, category_index);
+		})
+		.fail(function(e) {
+			console.log(e);
+		});
+  	});
+
+  	// DELETE A CARD
+	lol.on('click', '.delete_card', function(e) {
+		var card_index = $(this).parent().index();
+		var category_index = $(this).parent().parent().parent().index();
+		e.stopPropagation();
+
+		$.ajax({
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			type: "DELETE",
+
+		})
+		.done(function() {
+			// deleteCard(category_index, card_index);
+		})
+		.fail(function(e) {
+			console.log(e);
+		});
+  	});
+
+  	// CARD AND CATEGORY DOM VIEW CONTROL
+  	lol.on('click', '.add_content', function(e) {
+  		showAddContent($(this));
+  	});
+
+  	lol.on('click', '.cancel_new_button', function(e) {
+  		hideAddContent($(this));
+  	});
+
+
 	// CLICK ON CARD -- OPEN AND FILL CARD MODAL 
 	lol.on('click', '.card_button', function(e) {
   		var category_index = $(this).parent().parent().index();
@@ -254,36 +398,22 @@ $(function() {
 		$('#modal').attr('data-current-category', category_index);
 		$('#modal').attr('data-current-card', card_index);
 
-
 		$('#card_title').text(card.title);
 		$('#category_name').text(all_categories[category_index].title);
 		$('#text_description').text(card.description);
-		if(card.creator) {
-			$('#created_by').show();
-			$('#creator').text(card.creator);
-		} else {
-			$('#created_by').hide();
-		}
+		$('#creator').text(card.creator);
 
-		$('#card_labels').children().each(function() {
-			if ($(this)[0] !== $('#add_label_btn')[0]) {
-				$(this).remove();
-			}
+		$('.card_label').remove();
+		card.labels.forEach(function(l) {
+			var new_label = $(`<li class="card_label">${l.name}</li>`);
+			new_label.css('background-color', l.color);
+			$('#add_label_btn').before(new_label);
 		});
 
-		for (var i in card.labels) {
-			if (card.labels[i] === "") {continue;}
-			var new_label = $(`<li class="card_label">${card.labels[i].name}</li>`);
-			new_label.css('background-color', card.labels[i].color);
-			$('#add_label_btn').before(new_label);
-		}
-
 		$('#comment_list').empty();
-
-		for (var i in card.comments) {
-			if (card.comments[i] === "") {continue;}
-			addComment(card.comments[i])
-		}
+		card.comments.forEach(function(e) {
+			addComment(e);
+		});
 
 		if (card.labels.length < all_labels.length) {
 			$('#add_label_btn').show();
@@ -295,144 +425,18 @@ $(function() {
 		$('#modal').show();
   	});
 
-	// DELETE A CARD
-	lol.on('click', '.delete_card', function(e) {
-		var to_delete = $(this).parent();
-		var category_index = to_delete.parent().parent().index();
-		
-		e.stopPropagation();
-
-		$.ajax({
-			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
-			type: "DELETE",
-
-		})
-		.done(function() {
-			// all_categories[category_index].cards.splice(to_delete.index(), 1);
-			// to_delete.remove();
-		})
-		.fail(function(e) {
-			console.log(e);
-		});
-  	});
-
-	// ADD A CARD
-  	lol.on('click', '.add_card_button', function(e) {
-  		var category_index = $(this).parent().parent().index();
-  		var title = $(this).parent().find('input')[0].value;
-  		var card_list = $(this).parent().parent().find('.card_list');
-
-  		$(this).parent().hide();
-  		$(this).parent().find('input').val("");
-  		$(this).parent().parent().find('.add_content').show();
-
-
-		var new_card = {
-	    	title,
-	    	creator: user_email,
-	    	description: ""
-	    };
-  		$.ajax({
-		    url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card`,
-		    type: "POST",
-		    dataType : "json",
-		    data: new_card
-		})
-		.done(function(json) {
-			//handled by socket
-			// new_card = json.cards[json.cards.length - 1];
-  	// 		all_categories[category_index].cards.push(new_card);
-			// card_list.append(makeCardButton(new_card)[0]);
-		})
-		.fail(function(e) {
-			console.log(e);
-		});
-  	});
-
-  	// DELETE A CATEGORY
-  	lol.on('click', '.delete_category', function(e) {
-		var to_delete = $(this).parent();
-
-		$.ajax({
-			url: `http://localhost:3000/board/${bid}/list/${all_categories[to_delete.index()]._id}`,
-			type: "DELETE",
-
-		})
-		.done(function() {
-			// all_categories.splice(to_delete.index(), 1);
-			// to_delete.remove();
-		})
-		.fail(function(e) {
-			console.log(e);
-		});
-  	});
-
-  	// ADD A CATEGORY
-  	lol.on('click', '.add_category_button', function(e) {
-  		var new_category = new Category($(this).parent().find('input')[0].value, []); //mind find trouble with this empty array
-
-  		$(this).parent().hide();
-  		$(this).parent().find('input').val("");
-  		$(this).parent().parent().find('.add_content').show();
-
-  		$.ajax({
-		    url: `http://localhost:3000/board/${bid}/list/`,
-		    type: "POST",
-		    dataType : "json",
-		    data: new_category
-		})
-		.done(function(json) {
-			// new_category._id = json._id;
-			// all_categories.push(new_category);
-			// addCategory(new_category, all_categories.length);
-		})
-		.fail(function(e) {
-			console.log(e);
-		});
-  	});
-
-  	// CARD AND CATEGORY DOM VIEW CONTROL
-  	lol.on('click', '.add_content', function(e) {
-  		$(this).parent().find('.new_content').show();
-  		$(this).parent().find('input').focus();
-  		$(this).hide();
-  	});
-
-  	lol.on('click', '.cancel_new_button', function(e) {
-  		$(this).parent().hide();
-  		$(this).parent().find('input').val("");
-  		$(this).parent().parent().find('.add_content').show();
-  	});
-
   	// Modal Control
   	$('#close_card, #modal_bg').on('click', function(e) {
   		$('#modal').hide();
-  		$('#editable_description').hide();
-  		$('#text_description').show();
-  		$('#description_edit_btn').show();
+  		hideEditDescription();
   	});
 
   	$('#description_cancel').on('click', function(e) {
-  		$('#editable_description').hide();
-  		$('#text_description').show();
-  		$('#description_edit_btn').show();
+  		hideEditDescription();
   	});
 
   	$('#description_edit_btn').on('click', function(e) {
-  		$('#editable_description').show();
-  		$('#description_edit_btn').hide();
-  		var text_desc = $('#text_description');
-  		text_desc.hide();
-  		var textarea = $('#editable_description textarea');
-
-  		textarea.val(text_desc.text());
-  		if (text_desc.height() < 30) {
-  			textarea.height(30);
-  		} else {
-  			textarea.height(text_desc.height()-5);
-  		}
-  		
-  		textarea.focus();
+  		showEditDescription();
   	});
 
   	$('#description_save').on('click', function(e) {
@@ -462,17 +466,12 @@ $(function() {
 		});
   	});
 
-
   	$('#add_comment_btn').on('click', function(e) {
-  		$('#add_comment').show();
-  		$('#add_comment_btn').hide();
-  		$('#add_comment textarea').focus();
+  		showAddComment();
   	});
 
   	$('#comment_cancel').on('click', function(e) {
-  		$('#add_comment').hide();
-  		$('#add_comment_btn').show();
-  		$('#add_comment textarea').val("");
+  		hideAddComment();
   	});
 
   	$('#comment_save').on('click', function(e) {
@@ -488,10 +487,7 @@ $(function() {
 
 		card.comments.push(new_comment);
 		addComment(new_comment);
-
-		$('#add_comment').hide();
-  		$('#add_comment_btn').show();
-  		$('#add_comment textarea').val("");
+		hideAddComment();
 
 		$.ajax({
 			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
