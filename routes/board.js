@@ -35,7 +35,7 @@ router.get('/:bid', authCheck, permissionCheck, function(req, res) {
 	// });
 });
 
-router.get('/:bid/content', function(req, res) {
+router.get('/:bid/content', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -45,36 +45,38 @@ router.get('/:bid/content', function(req, res) {
 	})
 });
 
-router.post('/:bid/user', function(req, res) {
+router.post('/:bid/user', authCheck, permissionCheck, function(req, res) {
 	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) {
 			console.log(err);
 		} else {
 			if (!user) {
 				res.send("User does not exist");
+			} else {
+				var userObj = {_id: user._id, email: user.email}; 
+				console.log(userObj);
+				Board.findById(req.params.bid, function(err, board) {
+					if (err) {
+						console.log(err);
+					} else {
+						board.users.push(userObj);
+						board.save(function(err, board) {
+							if(err) {
+								console.log(err);
+							} else {
+								socketio.getInstance().in(req.params.bid).emit('newUser', {email: user.email});
+								res.send("complete");
+							}
+						})
+					}
+				});
 			}
-			var userObj = {_id: user._id, email: user.email}; 
-			console.log(userObj);
-			Board.findById(req.params.bid, function(err, board) {
-				if (err) {
-					console.log(err);
-				} else {
-					board.users.push(userObj);
-					board.save(function(err, board) {
-						if(err) {
-							console.log(err);
-						} else {
-							res.send("complete");
-						}
-					})
-				}
-			});
 		}
 	});
 	
 });
 
-router.post('/:bid/list', function(req, res) {
+router.post('/:bid/list', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -92,7 +94,7 @@ router.post('/:bid/list', function(req, res) {
 	})
 });
 
-router.delete('/:bid/list/:lid', function(req, res) {
+router.delete('/:bid/list/:lid', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -115,7 +117,7 @@ router.delete('/:bid/list/:lid', function(req, res) {
 
 
 // NOT USED
-router.patch('/:bid/list/:lid', function(req, res) {
+router.patch('/:bid/list/:lid', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -135,7 +137,7 @@ router.patch('/:bid/list/:lid', function(req, res) {
 	});
 });
 
-router.post('/:bid/list/:lid/card', function(req, res) {
+router.post('/:bid/list/:lid/card', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -158,7 +160,7 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 	});
 });
 
-router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
+router.delete('/:bid/list/:lid/card/:cid', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -184,7 +186,7 @@ router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
 	});
 });
 
-router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
+router.patch('/:bid/list/:lid/card/:cid', authCheck, permissionCheck, function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
@@ -205,7 +207,7 @@ router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
 				if (err) {
 					console.log(err);
 				} else {
-					socketio.getInstance().in(req.params.bid).emit('patchCard', {list_i, card_i});
+					socketio.getInstance().in(req.params.bid).emit('patchCard', {list_i, card_i, card});
 					res.json(board.lists.id(req.params.lid));
 				}
 			})

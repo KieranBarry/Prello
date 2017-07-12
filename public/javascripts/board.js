@@ -192,7 +192,18 @@ $(function() {
 		lol.children().eq(res.list_i).find('.card_list').children().eq(res.card_i).remove();
     })
     .on('patchCard', function(res) {
-    	//to do
+    	all_categories[res.list_i].cards[res.card_i] = res.card;
+    	var label_list = $('.category_li').eq(res.list_i).find('.features').eq(res.card_i);
+    	label_list.empty();
+    	res.card.labels.forEach(function(l) {
+	    	var card_button_label = $('<li class="card_label">');
+	  		card_button_label.css('background-color', l.color);
+	  		label_list.append(card_button_label);
+    	})
+    })
+    .on('newUser', function(res){
+    	var li = $(`<li class="user_li">${res.email}</li>`);
+		$('#users_ul').append(li);
     });
 
 
@@ -380,7 +391,7 @@ $(function() {
 		});
   	});
 
-  	// Card and Category Control
+  	// CARD AND CATEGORY DOM VIEW CONTROL
   	lol.on('click', '.add_content', function(e) {
   		$(this).parent().find('.new_content').show();
   		$(this).parent().find('input').focus();
@@ -432,8 +443,8 @@ $(function() {
   		var textarea = $('#editable_description textarea');
   		text_desc.text(textarea.val());
 
-  		var category_index = $(modal).attr('data-current-category');
-  		var card_index = $(modal).attr('data-current-card');
+  		var category_index = $('#modal').attr('data-current-category');
+  		var card_index = $('#modal').attr('data-current-card');
 
 		var card = all_categories[category_index].cards[card_index];
 		card.description = textarea.val();
@@ -442,6 +453,9 @@ $(function() {
 			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
 			data: card,
+		})
+		.done(function(e) {
+
 		})
 		.fail(function(e) {
 			console.log(e);
@@ -484,6 +498,9 @@ $(function() {
 			type: "PATCH",
 			data: card,
 		})
+		.done(function (e) {
+
+		})
 		.fail(function(e) {
 			console.log(e);
 		});
@@ -522,8 +539,8 @@ $(function() {
   	});
 
   	$('#labels_to_add').on('click', '.card_label', function(e) {
-  		var curr_category = $(modal).attr('data-current-category');
-  		var curr_card = $(modal).attr('data-current-card');
+  		var curr_category = $('#modal').attr('data-current-category');
+  		var curr_card = $('#modal').attr('data-current-card');
   		var card = all_categories[curr_category].cards[curr_card];
 
   		if(card.labels[0] === "") {
@@ -543,14 +560,17 @@ $(function() {
   		$('#labels_to_add').hide();
   		$('#label_plus_sign').show();
 
-  		var card_button_label = $('<li class="card_label">');
-  		card_button_label.css('background-color', $(this).css('background-color'));
-  		$('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
+  		// var card_button_label = $('<li class="card_label">');
+  		// card_button_label.css('background-color', $(this).css('background-color'));
+  		// $('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
 
   		$.ajax({
 			url: `http://localhost:3000/board/${bid}/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
 			type: "PATCH",
 			data: card
+		})
+		.done(function(e) {
+
 		})
 		.fail(function(e) {
 			console.log(e);
@@ -584,10 +604,10 @@ $(function() {
  			data: user
  		}).done(function(res) {
  			console.log(res);
- 			if (res === "complete") {
- 				var li = $(`<li class="user_li">${user.email}</li>`);
-				$('#users_ul').append(li);
- 			}
+ 			// if (res === "complete") {
+ 			// 	var li = $(`<li class="user_li">${user.email}</li>`);
+				// $('#users_ul').append(li);
+ 			// }
  		}).fail(function(err) {
  			console.log(err);
  		})
