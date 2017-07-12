@@ -10,7 +10,7 @@ var User = require('../models/user_model');
 var router = express.Router();
 
 router.get('/:bid', authCheck, permissionCheck, function(req, res) {
-	Board.find(function(err, boards) {
+	Board.find({users: {$elemMatch: {_id: req.user._id}}}, function(err, boards) {
 		if (err) {
 			console.log(err);
 		} else {
