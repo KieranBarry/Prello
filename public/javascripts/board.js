@@ -164,6 +164,17 @@ $(function() {
 	// }	
 
 	// var users_btn = $('<a id="users_btn" class="option">Users</a>');
+
+	var socket = io();
+	socket.on('newCard', function(res){
+		var new_card = res.card;
+		console.log(res.list_index);
+
+    	all_categories[res.list_index].cards.push(new_card);
+		$('#lol').children().eq(res.list_index).find('.card_list').append(makeCardButton(new_card)[0]);
+    });
+
+	//LOAD IN SIDE MENU DOM OBJECTS
 	var users_div = $('<div id="users_div"/>');
 	var users_title = $('<h5>Users</h5>');
 	var users_ul = $('<ul id="users_ul"/>');
@@ -178,8 +189,10 @@ $(function() {
 	users_div.append(users_title).append(users_ul).append(add_user_btn).append(new_user_div);
 	$('#logout_button').before(users_div);
 
+
+	// GET LIST AND USER DATA FROM SERVER, AND RENDER DOM OBJECTS
 	$.ajax({
-	    url: "http://localhost:3000/board/0/content",
+	    url: `http://localhost:3000/board/${bid}/content`,
 	    dataType : "json"
 	})
 	.done(function(json) {
@@ -200,8 +213,7 @@ $(function() {
 
 	/* //////     /////////   EVENT HANDLING    /////////    ////// */
 
-	// Card Button Control
-	// open and fill card modal
+	// CLICK ON CARD -- OPEN AND FILL CARD MODAL 
 	lol.on('click', '.card_button', function(e) {
   		var category_index = $(this).parent().parent().index();
 		var card_index = $(this).index();
@@ -250,7 +262,7 @@ $(function() {
 		$('#modal').show();
   	});
 
-	// delete card
+	// DELETE A CARD
 	lol.on('click', '.delete_card', function(e) {
 		var to_delete = $(this).parent();
 		var category_index = to_delete.parent().parent().index();
@@ -258,7 +270,7 @@ $(function() {
 		e.stopPropagation();
 
 		$.ajax({
-			url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
@@ -271,7 +283,7 @@ $(function() {
 		});
   	});
 
-	// add card
+	// ADD A CARD
   	lol.on('click', '.add_card_button', function(e) {
   		var category_index = $(this).parent().parent().index();
   		var title = $(this).parent().find('input')[0].value;
@@ -288,7 +300,7 @@ $(function() {
 	    	description: ""
 	    };
   		$.ajax({
-		    url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card`,
+		    url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card`,
 		    type: "POST",
 		    dataType : "json",
 		    data: new_card
@@ -308,7 +320,7 @@ $(function() {
 		var to_delete = $(this).parent();
 
 		$.ajax({
-			url: `http://localhost:3000/board/0/list/${all_categories[to_delete.index()]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
@@ -330,7 +342,7 @@ $(function() {
   		$(this).parent().parent().find('.add_content').show();
 
   		$.ajax({
-		    url: 'http://localhost:3000/board/0/list/',
+		    url: `http://localhost:3000/board/${bid}/list/`,
 		    type: "POST",
 		    dataType : "json",
 		    data: new_category
@@ -405,7 +417,7 @@ $(function() {
 		card.description = textarea.val();
 
 		$.ajax({
-			url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
 			data: card,
 		})
@@ -446,7 +458,7 @@ $(function() {
   		$('#add_comment textarea').val("");
 
 		$.ajax({
-			url: `http://localhost:3000/board/0/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[category_index]._id}/card/${all_categories[category_index].cards[card_index]._id}`,
 			type: "PATCH",
 			data: card,
 		})
@@ -514,7 +526,7 @@ $(function() {
   		$('.category_li').eq(curr_category).find('.features').eq(curr_card).append(card_button_label);
 
   		$.ajax({
-			url: `http://localhost:3000/board/0/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[curr_category]._id}/card/${all_categories[curr_category].cards[curr_card]._id}`,
 			type: "PATCH",
 			data: card
 		})
@@ -545,7 +557,7 @@ $(function() {
  		$("#add_user_btn").show();
 
  		$.ajax({
- 			url: 'http://localhost:3000/board/0/user',
+ 			url: `http://localhost:3000/board/${bid}/user`,
  			type: "POST",
  			data: user
  		}).done(function(res) {
@@ -577,6 +589,14 @@ $(function() {
 	// 		$('#down_arrow').html("&#x25b2");
 	// 	}
 	// });
+
+/////////////////// SOCKETIO ////////////////////////
+    // var socket = io();
+    // $('form').submit(function(){
+    // 	socket.emit('chat message', $('#m').val());
+    // 	$('#m').val('');
+    // 	return false;
+    // });
 
 });
 

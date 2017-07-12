@@ -1,9 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var authCheck = require('../authCheck');
+var socketio = require('../socketio');
 var permissionCheck = require("../permissionCheck");
 var Board = require('../models/board_model');
 var User = require('../models/user_model');
+
 
 var router = express.Router();
 
@@ -24,7 +26,7 @@ router.get('/:bid', authCheck, permissionCheck, function(req, res) {
 					boards_to_add.push(board);
 				}
 			})
-			res.render('board', { title: board_title, stylesheet: '../stylesheets/board.css', javascript: '../javascripts/board.js', email: req.session.user.email, showOptions: true, boards:boards_to_add });
+			res.render('board', { board_id: req.params.bid, title: board_title, stylesheet: '../stylesheets/board.css', javascript: '../javascripts/board.js', email: req.session.user.email, showOptions: true, boards:boards_to_add });
 		}
 	});
 	// Board.findById(board_id, function(err, board) {
@@ -56,7 +58,7 @@ router.post('/:bid/user', function(req, res) {
 			}
 			var userObj = {_id: user._id, email: user.email}; 
 			console.log(userObj);
-			Board.findById(board_id, function(err, board) {
+			Board.findById(req.params.bid, function(err, board) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -76,7 +78,7 @@ router.post('/:bid/user', function(req, res) {
 });
 
 router.post('/:bid/list', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -93,7 +95,7 @@ router.post('/:bid/list', function(req, res) {
 });
 
 router.delete('/:bid/list/:lid', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -110,7 +112,7 @@ router.delete('/:bid/list/:lid', function(req, res) {
 });
 
 router.patch('/:bid/list/:lid', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -130,7 +132,7 @@ router.patch('/:bid/list/:lid', function(req, res) {
 });
 
 router.post('/:bid/list/:lid/card', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -140,7 +142,15 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 				if (err) {
 					console.log(err);
 				} else {
-					io.emit("newCard", { for: 'everyone', card: req.body})
+					var list_index = -1
+					var index = 0;
+					board.lists.forEach(function(list) {
+						if (list._id == req.params.lid) {
+							list_index = index;
+						}
+						index++;
+					})
+					socketio.getInstance().emit('newCard', { for: 'everyone', list_index, card: req.body});
 					res.json(board.lists.id(req.params.lid));
 				}
 			})
@@ -149,7 +159,7 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 });
 
 router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -167,7 +177,7 @@ router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
 });
 
 router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {

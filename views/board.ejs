@@ -1,4 +1,10 @@
 <%- include header.ejs %>
+	<head> 
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
+	<script>
+		var bid = "<%- board_id %>";
+	</script>
 	<h2><%= title %></h2>
 	<div id="lol_container">
 		<ul id="lol">

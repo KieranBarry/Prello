@@ -10,7 +10,9 @@
 		<script src=<%= javascript %>></script>
 	</head>
 	<body>
-		<% var user_email = email; %>
+		<script>
+			var user_email = "<%- email %>";
+		</script>
 		<nav>
 			<% if(boards.length > 0) { %>
 				<button class="dropdown_button">
