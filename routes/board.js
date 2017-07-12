@@ -84,6 +84,7 @@ router.post('/:bid/list', function(req, res) {
 				if (err) {
 					console.log(err);
 				} else {
+					socketio.getInstance().in(req.params.bid).emit('newCategory', {category: board.lists[board.lists.length - 1]});
 					res.json(board.lists[board.lists.length - 1]);
 				}
 			})
@@ -96,11 +97,15 @@ router.delete('/:bid/list/:lid', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
+			var list_i = board.lists.findIndex(function(list) {
+				return list._id == req.params.lid;
+			});
 			board.lists.pull(req.params.lid);
 			board.save(function(err, board) {
 				if (err) {
 					console.log(err);
 				} else {
+					socketio.getInstance().in(req.params.bid).emit('deleteCategory', {list_i});
 					res.send("complete");
 				}
 			});
@@ -108,6 +113,8 @@ router.delete('/:bid/list/:lid', function(req, res) {
 	});
 });
 
+
+// NOT USED
 router.patch('/:bid/list/:lid', function(req, res) {
 	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
@@ -133,22 +140,18 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			board.lists.id(req.params.lid).cards.push(req.body);
+			var list_i = board.lists.findIndex(function(list) {
+				return list._id == req.params.lid;
+			});
+			board.lists[list_i].cards.push(req.body);
 
 			board.save(function(err, board) {
 				if (err) {
 					console.log(err);
 				} else {
-					var list_index = -1
-					var index = 0;
-					board.lists.forEach(function(list) {
-						if (list._id == req.params.lid) {
-							list_index = index;
-						}
-						index++;
-					})
-					socketio.getInstance().in(req.params.bid).emit('newCard', {list_index, card: req.body});
-					res.json(board.lists.id(req.params.lid));
+					var list = board.lists.id(req.params.lid);
+					socketio.getInstance().in(req.params.bid).emit('newCard', {list_i, card: list.cards[list.cards.length-1]});
+					res.json(list);
 				}
 			})
 		}
@@ -160,12 +163,20 @@ router.delete('/:bid/list/:lid/card/:cid', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			board.lists.id(req.params.lid).cards.pull(req.params.cid);
+			var list_i = board.lists.findIndex(function(list) {
+				return list._id == req.params.lid;
+			});
+			var card_i = board.lists[list_i].cards.findIndex(function(card) {
+				return card._id == req.params.cid;
+			});
+			board.lists[list_i].cards.pull(req.params.cid);
 
 			board.save(function(err, board) {
 				if (err) {
 					console.log(err);
 				} else {
+					console.log(`list index: ${list_i}, card index: ${card_i}`);
+					socketio.getInstance().in(req.params.bid).emit('deleteCard', {list_i, card_i});
 					res.json(board.lists.id(req.params.lid));
 				}
 			})
@@ -178,7 +189,13 @@ router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			var card = board.lists.id(req.params.lid).cards.id(req.params.cid);
+			var list_i = board.lists.findIndex(function(list) {
+				return list._id == req.params.lid;
+			});
+			var card_i = board.lists[list_i].cards.findIndex(function(card) {
+				return card._id == req.params.cid;
+			});
+			var card = board.lists[list_i].cards[card_i];
 			card.title = req.body.title || card.title;
 			card.description = req.body.description || card.description;
 			card.labels = req.body.labels || card.labels;
@@ -188,6 +205,7 @@ router.patch('/:bid/list/:lid/card/:cid', function(req, res) {
 				if (err) {
 					console.log(err);
 				} else {
+					socketio.getInstance().in(req.params.bid).emit('patchCard', {list_i, card_i});
 					res.json(board.lists.id(req.params.lid));
 				}
 			})

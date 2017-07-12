@@ -165,20 +165,40 @@ $(function() {
 
 	// var users_btn = $('<a id="users_btn" class="option">Users</a>');
 
+	lol = $("#lol");
+
+/////////////////// SOCKETIO ////////////////////////
+
 	var socket = io();
 	socket.on('connect', function() {
 		// tell the server to connect you to this board's room
 		socket.emit('room', bid);
-	});
-	socket.on('newCard', function(res){
-		var new_card = res.card;
-		console.log(res.list_index);
-
-    	all_categories[res.list_index].cards.push(new_card);
-		$('#lol').children().eq(res.list_index).find('.card_list').append(makeCardButton(new_card)[0]);
+	})
+	.on('newCategory', function(res) {
+		all_categories.push(res.category);
+		addCategory(res.category, all_categories.length);
+    })
+    .on('deleteCategory', function(res) {
+    	all_categories.splice(res.list_i, 1);
+		lol.children().eq(res.list_i).remove();
+    })
+	.on('newCard', function(res){
+    	all_categories[res.list_i].cards.push(res.card);
+		lol.children().eq(res.list_i).find('.card_list').append(makeCardButton(res.card)[0]);
+    })
+    .on('deleteCard', function(res) {
+    	console.log(`list index: ${res.list_i}, card index: ${res.card_i}`);
+    	all_categories[res.list_i].cards.splice(res.card_i, 1);
+		lol.children().eq(res.list_i).find('.card_list').children().eq(res.card_i).remove();
+    })
+    .on('patchCard', function(res) {
+    	//to do
     });
 
-	//LOAD IN SIDE MENU DOM OBJECTS
+
+///////////////////// PAGE SETUP /////////////////////////
+
+    //LOAD IN SIDE MENU DOM OBJECTS
 	var users_div = $('<div id="users_div"/>');
 	var users_title = $('<h5>Users</h5>');
 	var users_ul = $('<ul id="users_ul"/>');
@@ -213,9 +233,7 @@ $(function() {
 		console.log(err);
 	});
 
-	lol = $("#lol");
-
-	/* //////     /////////   EVENT HANDLING    /////////    ////// */
+///////////////////////////////// EVENT HANDLING /////////////////////////////////
 
 	// CLICK ON CARD -- OPEN AND FILL CARD MODAL 
 	lol.on('click', '.card_button', function(e) {
@@ -279,8 +297,8 @@ $(function() {
 
 		})
 		.done(function() {
-			all_categories[category_index].cards.splice(to_delete.index(), 1);
-			to_delete.remove();
+			// all_categories[category_index].cards.splice(to_delete.index(), 1);
+			// to_delete.remove();
 		})
 		.fail(function(e) {
 			console.log(e);
@@ -320,7 +338,7 @@ $(function() {
 		});
   	});
 
-  	// Category control
+  	// DELETE A CATEGORY
   	lol.on('click', '.delete_category', function(e) {
 		var to_delete = $(this).parent();
 
@@ -330,15 +348,15 @@ $(function() {
 
 		})
 		.done(function() {
-			console.log()
-			all_categories.splice(to_delete.index(), 1);
-			to_delete.remove();
+			// all_categories.splice(to_delete.index(), 1);
+			// to_delete.remove();
 		})
 		.fail(function(e) {
 			console.log(e);
 		});
   	});
 
+  	// ADD A CATEGORY
   	lol.on('click', '.add_category_button', function(e) {
   		var new_category = new Category($(this).parent().find('input')[0].value, []); //mind find trouble with this empty array
 
@@ -353,10 +371,9 @@ $(function() {
 		    data: new_category
 		})
 		.done(function(json) {
-			console.log(json);
-			new_category._id = json._id;
-			all_categories.push(new_category);
-			addCategory(new_category, all_categories.length);
+			// new_category._id = json._id;
+			// all_categories.push(new_category);
+			// addCategory(new_category, all_categories.length);
 		})
 		.fail(function(e) {
 			console.log(e);
@@ -575,33 +592,6 @@ $(function() {
  			console.log(err);
  		})
  	});
-
- //  	$('#options_button').on('click', function(e) {
-	// 	$('#side_menu').width(250);
-	// });
-
-	// $('.close_button').on('click', function(e) {
-	// 	$('#side_menu').width(0);
-	// });
-
-	// // Dropdown Control
-	// $('.dropdown_button').on('click', function(e) {
-	// 	if ($('#drop_down').height() === 300) {
-	// 		$('#drop_down').height(0);
-	// 		$('#down_arrow').html("&#9660");
-	// 	} else {
-	// 		$('#drop_down').height(300);
-	// 		$('#down_arrow').html("&#x25b2");
-	// 	}
-	// });
-
-/////////////////// SOCKETIO ////////////////////////
-    // var socket = io();
-    // $('form').submit(function(){
-    // 	socket.emit('chat message', $('#m').val());
-    // 	$('#m').val('');
-    // 	return false;
-    // });
 
 });
 
