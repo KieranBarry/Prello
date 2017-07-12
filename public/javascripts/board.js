@@ -166,6 +166,10 @@ $(function() {
 	// var users_btn = $('<a id="users_btn" class="option">Users</a>');
 
 	var socket = io();
+	socket.on('connect', function() {
+		// tell the server to connect you to this board's room
+		socket.emit('room', bid);
+	});
 	socket.on('newCard', function(res){
 		var new_card = res.card;
 		console.log(res.list_index);
@@ -306,9 +310,10 @@ $(function() {
 		    data: new_card
 		})
 		.done(function(json) {
-			new_card = json.cards[json.cards.length - 1];
-  			all_categories[category_index].cards.push(new_card);
-			card_list.append(makeCardButton(new_card)[0]);
+			//handled by socket
+			// new_card = json.cards[json.cards.length - 1];
+  	// 		all_categories[category_index].cards.push(new_card);
+			// card_list.append(makeCardButton(new_card)[0]);
 		})
 		.fail(function(e) {
 			console.log(e);

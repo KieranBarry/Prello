@@ -9,10 +9,7 @@ var User = require('../models/user_model');
 
 var router = express.Router();
 
-var board_id = ""
 router.get('/:bid', authCheck, permissionCheck, function(req, res) {
-	board_id = req.params.bid;
-
 	Board.find(function(err, boards) {
 		if (err) {
 			console.log(err);
@@ -20,7 +17,7 @@ router.get('/:bid', authCheck, permissionCheck, function(req, res) {
 			var board_title = "uh oh";
 			var boards_to_add = [];
 			boards.forEach(function(board) {
-				if (board._id == board_id) {
+				if (board._id == req.params.bid) {
 					board_title = board.title;
 				} else {
 					boards_to_add.push(board);
@@ -39,7 +36,7 @@ router.get('/:bid', authCheck, permissionCheck, function(req, res) {
 });
 
 router.get('/:bid/content', function(req, res) {
-	Board.findById(board_id, function(err, board) {
+	Board.findById(req.params.bid, function(err, board) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -150,7 +147,7 @@ router.post('/:bid/list/:lid/card', function(req, res) {
 						}
 						index++;
 					})
-					socketio.getInstance().emit('newCard', { for: 'everyone', list_index, card: req.body});
+					socketio.getInstance().in(req.params.bid).emit('newCard', {list_index, card: req.body});
 					res.json(board.lists.id(req.params.lid));
 				}
 			})
