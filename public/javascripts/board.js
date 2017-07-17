@@ -324,7 +324,7 @@ $(function() {
   	lol.on('click', '.delete_category', function(e) {
 		var index = $(this).parent().index();
 		$.ajax({
-			url: `http://localhost:3000/board/${bid}/list/${all_categories[to_delete.index()]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[index]._id}`,
 			type: "DELETE",
 
 		})
