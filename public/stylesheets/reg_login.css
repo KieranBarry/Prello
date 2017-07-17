@@ -52,6 +52,18 @@ form {
 	border-radius: 4px;
 }
 
+a {
+	float: right;
+    margin-top: 12px;
+    font-size: 14px;
+    color:#6495ED;
+}
+
+a:hover {
+	color: #3D59AB;
+	cursor: pointer;
+}
+
 .form_container {
 	margin: 0px;
 }
