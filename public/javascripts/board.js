@@ -252,10 +252,10 @@ $(function() {
     	var label_list = $('.category_li').eq(res.list_i).find('.features').eq(res.card_i);
     	label_list.empty();
     	res.card.labels.forEach(function(l) {
-	    	var card_button_label = $('<li class="card_label">');
+	    	var card_button_label = $('<li>');
 	  		card_button_label.css('background-color', l.color);
 	  		label_list.append(card_button_label);
-    	})
+    	});
     })
     .on('newUser', function(res){
     	var li = $(`<li class="user_li">${res.email}</li>`);
@@ -324,7 +324,7 @@ $(function() {
   	lol.on('click', '.delete_category', function(e) {
 		var index = $(this).parent().index();
 		$.ajax({
-			url: `http://localhost:3000/board/${bid}/list/${all_categories[index]._id}`,
+			url: `http://localhost:3000/board/${bid}/list/${all_categories[to_delete.index()]._id}`,
 			type: "DELETE",
 
 		})
