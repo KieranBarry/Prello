@@ -48,9 +48,6 @@ router.post('/register', function(req, res, next) {
 		if(user) {
       		res.render('reg_login', { title: 'Prello Login', stylesheet: '/stylesheets/reg_login.css', javascript: '/javascripts/reg_login.js', login_error: "", register_error: "Account already exists for this email.", email: "", showOptions: false, boards: [] });
 		} else {
-			console.log("here");
-			var someOtherPlaintextPassword = 'not_bacon';
-
 			var myHash;
 			bcrypt.hash(req.body.password, 10, function(err, hash) {
 			  // Store hash in your password DB. 
@@ -59,19 +56,19 @@ router.post('/register', function(req, res, next) {
 			  	console.log(err);
 			  } else {
 				  	var newUser = new User({
-					email: req.body.email,
-					password: hash
-				});
+						email: req.body.email,
+						password: hash
+					});
 
-				newUser.save(function (err, user) {
-					if (err) {
-				    	console.log(err);
-				  	} else {
-				  		req.session.user = user;
-				  		res.redirect('/');
-					}
-				});
-			  }
+					newUser.save(function (err, user) {
+						if (err) {
+					    	console.log(err);
+					  	} else {
+					  		req.session.user = user;
+					  		res.redirect('/');
+						}
+					});
+				}
 			});
 			
 
@@ -98,6 +95,7 @@ router.post('/login', function(req, res) {
     	if (!user) {
       		res.render('reg_login', { title: 'Prello Login', stylesheet: '/stylesheets/reg_login.css', javascript: '/javascripts/reg_login.js', login_error: "Invalid email or password", register_error: "", email: "", showOptions: false, boards: [] });
     	} else {
+    		console.log(user.password);
     		bcrypt.compare(req.body.password, user.password, function(err, correct) {
     			if (err) {
     				console.log(err);

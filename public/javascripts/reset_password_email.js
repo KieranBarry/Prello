@@ -10,11 +10,11 @@ $(function() {
 			dataType: "json"
 		}).done(function(json) {
 			if(json.msg === "complete") {
-				$("#email_form").attr("action", `/reset/${$('#email_input').val()}`);
+				$("#email_form").attr("action", `/reset/token`);
 				this.submit();
 			} else {
 				$('#error').text('Email does not exist in our database');
-				$('#password_form input[type="text"]').css('borderColor', 'red');
+				$('input').css('borderColor', 'red');
 			}
 		});
 
